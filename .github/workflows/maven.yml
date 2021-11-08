@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   build:
+    name: CI/CD project0
     runs-on: macos-latest
 
     steps:
@@ -15,4 +16,4 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file damilare-olaleye/damilare-olaleye-project-0/pom.xml
