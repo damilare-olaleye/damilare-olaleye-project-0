@@ -115,7 +115,7 @@ public class ClientService {
 		}
 		
 		if(!DateValidator.getInstance().isStrict() || dto.getDateOfBirth().equals("")) {
-			throw new InvalidParameterException("Emaill cannot be blank and must contain date");
+			throw new InvalidParameterException("Date cannot be blank and must contain date");
 		}
 		
 		dto.setFirstName(dto.getFirstName().trim());
