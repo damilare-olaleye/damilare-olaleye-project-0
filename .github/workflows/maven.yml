@@ -14,6 +14,13 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-          cache: maven
-      - name: Build with Maven
+        
+      - name: Cache Maven packages to speed up build
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hasFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+          
+      - name: Build Project0 with Maven
         run: mvn -B package --file project-0/pom.xml
