@@ -16,6 +16,7 @@ public class Application {
 		Javalin app = Javalin.create();
 		
 		Logger logger = LoggerFactory.getLogger(Application.class);
+	
 		
 		app.before(ctx -> {
 			logger.info(ctx.method() + " request received to the " + ctx.path() + " endpoint");
@@ -28,6 +29,7 @@ public class Application {
 		exceptionController.mapExceptions(app);
 		
 		app.start();
+		
 		
 
 	}
