@@ -3,7 +3,7 @@ name: Project Zero
 on: [push]
 
 jobs:
-  build:
+  build_and_test:
     name: CI/CD project0
     runs-on: macos-latest
 
