@@ -24,19 +24,16 @@ public class ClientDAO {
 	public Client addClient(AddOrUpdateClientDTO client) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
-			String sql = "INSERT INTO client (client_first_name, client_last_name, client_dob, client_active_date, "
-					+ "client_street, client_pin_code, client_email_id, client_phone_number)"
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO client (client_first_name, client_last_name,"
+					+ "client_street, client_pin_code, client_phone_number)"
+					+ " VALUES (?, ?, ?, ?, ?)";
 
 			PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 			pstmt.setString(1, client.getFirstName());
 			pstmt.setString(2, client.getLastName());
-			pstmt.setDate(3, (Date) client.getDateOfBirth());
-			pstmt.setDate(4, (Date) client.getActiveDate());
 			pstmt.setString(5, client.getStreet());
 			pstmt.setString(6, client.getPinCode());
-			pstmt.setString(7, client.getEmailId());
 			pstmt.setString(8, client.getPhoneNumber());
 
 			int numberOfRecordsInserted = pstmt.executeUpdate();
@@ -51,8 +48,7 @@ public class ClientDAO {
 			int automaticallyGeneratedId = rs.getInt(1);
 
 			return new Client(automaticallyGeneratedId, client.getFirstName(), client.getLastName(),
-					client.getDateOfBirth(), client.getActiveDate(), client.getStreet(), client.getPinCode(),
-					client.getEmailId(), client.getPhoneNumber());
+					 client.getStreet(), client.getPinCode(), client.getPhoneNumber());
 		}
 	}
 
@@ -71,14 +67,11 @@ public class ClientDAO {
 				int id = rs.getInt("client_id");
 				String firstName = rs.getString("client_first_name");
 				String lastName = rs.getString("client_last_name");
-				Date dateOfBirth = rs.getDate("client_dob");
-				Date activeDate = rs.getDate("client_active_date");
 				String clientStreet = rs.getString("client_street");
 				String pinCode = rs.getString("client_pin_code");
-				String emailId = rs.getString("client_email_id");
 				String phoneNumber = rs.getString("client_phone_number");
 
-				Client c = new Client(id, firstName, lastName, dateOfBirth, activeDate, clientStreet, pinCode, emailId,
+				Client c = new Client(id, firstName, lastName,clientStreet, pinCode,
 						phoneNumber);
 
 				listOfClients.add(c);
@@ -100,8 +93,8 @@ public class ClientDAO {
 
 			if (rs.next()) {
 				return new Client(rs.getInt("client_id"), rs.getString("client_first_name"),
-						rs.getString("client_last_name"), rs.getDate("client_dob"), rs.getDate("client_active_date"),
-						rs.getString("client_Street"), rs.getString("client_pin_code"), rs.getString("client_email_id"),
+						rs.getString("client_last_name"),
+						rs.getString("client_Street"), rs.getString("client_pin_code"),
 						rs.getString("client_phone_number"));
 
 			} else {
@@ -115,19 +108,16 @@ public class ClientDAO {
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "UPDATE client " + "SET client_first_name = ?," + "		  client_last_name = ?,"
-					+ "		  client_dob = ?," + "		  client_active_date = ?," + "		  client_street = ?,"
-					+ "		  client_pin_code = ?," + "       client_email_id ?," + "       client_phone_number"
+					+  "		  client_street = ?,"
+					+ "		  client_pin_code = ?,"  + "       client_phone_number"
 					+ "WHERE " + "client_id = ?;";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, client.getFirstName());
 			pstmt.setString(2, client.getLastName());
-			pstmt.setDate(3, (Date) client.getDateOfBirth());
-			pstmt.setDate(4, (Date) client.getActiveDate());
 			pstmt.setString(5, client.getStreet());
 			pstmt.setString(6, client.getPinCode());
-			pstmt.setString(7, client.getEmailId());
 			pstmt.setString(8, client.getPhoneNumber());
 			pstmt.setInt(8, clientId);
 
@@ -139,9 +129,8 @@ public class ClientDAO {
 
 		}
 
-		return new Client(clientId, client.getFirstName(), client.getLastName(), client.getDateOfBirth(),
-				client.getActiveDate(), client.getStreet(), client.getPinCode(), client.getEmailId(),
-				client.getPhoneNumber());
+		return new Client(clientId, client.getFirstName(), client.getLastName(), 
+				client.getStreet(), client.getPinCode(), client.getPhoneNumber());
 	}
 
 	public void editClientId(int id) throws SQLException {

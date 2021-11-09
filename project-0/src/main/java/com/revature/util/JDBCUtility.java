@@ -10,7 +10,7 @@ public class JDBCUtility {
 
 	public static Connection getConnection() throws SQLException {
 		
-		String url = "jdbc:postgresql://localhost:5432/postgres";
+		String url = "jdbc:postgresql://localhost:5432/ProjectZero";
 		String username = "postgres";
 		String password = "password";
 		

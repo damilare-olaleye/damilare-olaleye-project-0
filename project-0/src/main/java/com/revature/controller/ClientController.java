@@ -71,10 +71,10 @@ public class ClientController {
 	public void registerEndpoints(Javalin app) {
 
 		app.post("/clients", addClient);
-		app.get("/clients", getAllClients);
-		app.get("/clients/{id}", getClientById);
+		app.get("/clients", getAllClients);  //works
+		app.get("/clients/{id}", getClientById); //works
 		app.put("/clients/{id}", editClientById);
-		app.delete("/client/{id}", deleteClientById);
+		app.delete("/clients/{id}", deleteClientById);
 		app.delete("/clients", deleteAllClients);
 	}
 }
