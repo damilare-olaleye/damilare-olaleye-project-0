@@ -24,17 +24,15 @@ public class ClientDAO {
 	public Client addClient(AddOrUpdateClientDTO client) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
-			String sql = "INSERT INTO client (client_first_name, client_last_name,"
-					+ "client_street, client_pin_code, client_phone_number)"
-					+ " VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO client (client_first_name, client_last_name, client_street, client_pin_code, client_phone_number) VALUES (?,?,?,?,?)";
 
 			PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 			pstmt.setString(1, client.getFirstName());
 			pstmt.setString(2, client.getLastName());
-			pstmt.setString(5, client.getStreet());
-			pstmt.setString(6, client.getPinCode());
-			pstmt.setString(8, client.getPhoneNumber());
+			pstmt.setString(3, client.getStreet());
+			pstmt.setString(4, client.getPinCode());
+			pstmt.setString(5, client.getPhoneNumber());
 
 			int numberOfRecordsInserted = pstmt.executeUpdate();
 
@@ -47,8 +45,8 @@ public class ClientDAO {
 			rs.next();
 			int automaticallyGeneratedId = rs.getInt(1);
 
-			return new Client(automaticallyGeneratedId, client.getFirstName(), client.getLastName(),
-					 client.getStreet(), client.getPinCode(), client.getPhoneNumber());
+			return new Client(automaticallyGeneratedId, client.getFirstName(), client.getLastName(), client.getStreet(),
+					client.getPinCode(), client.getPhoneNumber());
 		}
 	}
 
@@ -71,8 +69,7 @@ public class ClientDAO {
 				String pinCode = rs.getString("client_pin_code");
 				String phoneNumber = rs.getString("client_phone_number");
 
-				Client c = new Client(id, firstName, lastName,clientStreet, pinCode,
-						phoneNumber);
+				Client c = new Client(id, firstName, lastName, clientStreet, pinCode, phoneNumber);
 
 				listOfClients.add(c);
 			}
@@ -93,9 +90,8 @@ public class ClientDAO {
 
 			if (rs.next()) {
 				return new Client(rs.getInt("client_id"), rs.getString("client_first_name"),
-						rs.getString("client_last_name"),
-						rs.getString("client_Street"), rs.getString("client_pin_code"),
-						rs.getString("client_phone_number"));
+						rs.getString("client_last_name"), rs.getString("client_Street"),
+						rs.getString("client_pin_code"), rs.getString("client_phone_number"));
 
 			} else {
 				return null;
@@ -108,8 +104,7 @@ public class ClientDAO {
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "UPDATE client " + "SET client_first_name = ?," + "		  client_last_name = ?,"
-					+  "		  client_street = ?,"
-					+ "		  client_pin_code = ?,"  + "       client_phone_number"
+					+ "		  client_street = ?," + "		  client_pin_code = ?," + "       client_phone_number"
 					+ "WHERE " + "client_id = ?;";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -129,14 +124,14 @@ public class ClientDAO {
 
 		}
 
-		return new Client(clientId, client.getFirstName(), client.getLastName(), 
-				client.getStreet(), client.getPinCode(), client.getPhoneNumber());
+		return new Client(clientId, client.getFirstName(), client.getLastName(), client.getStreet(),
+				client.getPinCode(), client.getPhoneNumber());
 	}
 
 	public void editClientId(int id) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
-			String sql = "UPDATE FROM client WHERE client_id = ?";
+			String sql = "UPDATE client" + "SET client_first_name = ?," + " WHERE client_id = ?";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, id);
@@ -144,7 +139,7 @@ public class ClientDAO {
 			int numberOfRecordsEdited = pstmt.executeUpdate();
 
 			if (numberOfRecordsEdited != 1) {
-				throw new SQLException("Unable to edit student recored with id of " + id);
+				throw new SQLException("Unable to edit client recored with id of " + id);
 			}
 		}
 	}

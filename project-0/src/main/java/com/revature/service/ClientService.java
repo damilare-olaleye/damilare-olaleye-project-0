@@ -109,9 +109,9 @@ public class ClientService {
 		}
 
 		if (dto.getLastName().trim().equals("")) {
-			throw new InvalidParameterException("Last name cannnot be blank");
+			throw new InvalidParameterException("Last name cannot be blank");
+			
 		}
-
 		if (dto.getPinCode().trim().equals("")) {
 			throw new InvalidParameterException("PinCode cannot be blank");
 		}

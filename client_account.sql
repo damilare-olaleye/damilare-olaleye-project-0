@@ -48,6 +48,12 @@ VALUES
 SELECT *
 FROM client 
 
+SELECT * FROM client WHERE client_id = 1
+
+UPDATE client
+SET client_first_name = 'Antonio'
+WHERE client_id = 1;
+
 
 -- account_type table --
 
