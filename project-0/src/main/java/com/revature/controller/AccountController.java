@@ -81,8 +81,8 @@ public class AccountController {
 	public void registerEndpoints(Javalin app) {
 
 		app.post("/clients/{client_id}/accounts", addAccount); // works
-		app.get("/clients/{client_id}/accounts", getAllAccountsByClientId); 
-		app.get("/clients/{client_id}/accounts/{account_id}", getAllAccountsByAccountId);
+		app.get("/clients/{client_id}/accounts", getAllAccountsByClientId); // works
+		app.get("/clients/{client_id}/accounts/{account_id}", getAllAccountsByAccountId); // works
 		app.put("/clients/{client_id}/accounts/{account_id}", editAccountsByClientId);
 		app.delete("/clients/{client_id}/accounts/{account_id}", deleteAccountByClientId);
 
