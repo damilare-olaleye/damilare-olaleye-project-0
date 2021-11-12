@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.dto.AddOrUpdateClientDTO;
+import com.revature.model.Account;
 import com.revature.model.Client;
 import com.revature.util.JDBCUtility;
 
@@ -50,6 +51,7 @@ public class ClientDAO {
 		}
 	}
 
+
 	// READ CLIENT
 	public List<Client> getAllClients() throws SQLException {
 
@@ -87,8 +89,9 @@ public class ClientDAO {
 			pstmt.setInt(1, id);
 
 			ResultSet rs = pstmt.executeQuery();
-
+			
 			if (rs.next()) {
+				
 				return new Client(rs.getInt("client_id"), rs.getString("client_first_name"),
 						rs.getString("client_last_name"), rs.getString("client_Street"),
 						rs.getString("client_pin_code"), rs.getString("client_phone_number"));
@@ -104,22 +107,22 @@ public class ClientDAO {
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "UPDATE client " + "SET client_first_name = ?," + "		  client_last_name = ?,"
-					+ "		  client_street = ?," + "		  client_pin_code = ?," + "       client_phone_number"
+					+ "		  client_street = ?," + "		  client_pin_code = ?," + "       client_phone_number = ? "
 					+ "WHERE " + "client_id = ?;";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, client.getFirstName());
 			pstmt.setString(2, client.getLastName());
-			pstmt.setString(5, client.getStreet());
-			pstmt.setString(6, client.getPinCode());
-			pstmt.setString(8, client.getPhoneNumber());
-			pstmt.setInt(8, clientId);
+			pstmt.setString(3, client.getStreet());
+			pstmt.setString(4, client.getPinCode());
+			pstmt.setString(5, client.getPhoneNumber());
+			pstmt.setInt(6, clientId);
 
 			int numberOfRecordsUpdated = pstmt.executeUpdate();
 
 			if (numberOfRecordsUpdated != 1) {
-				throw new SQLException("Unable to update client recotd with id of " + clientId);
+				throw new SQLException("Unable to update client record with id of " + clientId);
 			}
 
 		}
@@ -128,13 +131,15 @@ public class ClientDAO {
 				client.getPinCode(), client.getPhoneNumber());
 	}
 
-	public void editClientId(int id) throws SQLException {
+	public void editClientId(int id, String fName) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "UPDATE client" + "SET client_first_name = ?," + " WHERE client_id = ?";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, id);
+			
+			pstmt.setString(1, fName);
+			pstmt.setInt(2, id);
 
 			int numberOfRecordsEdited = pstmt.executeUpdate();
 
@@ -156,7 +161,7 @@ public class ClientDAO {
 			int numberOfRecordsDeleted = pstmt.executeUpdate();
 
 			if (numberOfRecordsDeleted != 1) {
-				throw new SQLException("Unable to delete student recored with id of " + id);
+				throw new SQLException("Unable to delete client recored with id of " + id);
 			}
 		}
 	}
@@ -174,4 +179,5 @@ public class ClientDAO {
 			}
 		}
 	}
+
 }

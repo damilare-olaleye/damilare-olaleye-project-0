@@ -1,0 +1,4 @@
+11 Nov 2021 - 15:32:56.182 [main] INFO 
+				org.eclipse.jetty.util.log - Logging initialized @654ms to org.eclipse.jetty.util.log.Slf4jLog
+11 Nov 2021 - 15:33:15.960 [qtp1608230649-18] INFO 
+				com.revature.main.Application - GET request received to the /clients/4/accounts endpoint

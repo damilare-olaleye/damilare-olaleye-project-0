@@ -15,7 +15,7 @@ public class AddOrUpdateClientDTO {
 	}
 
 	public AddOrUpdateClientDTO(String firstName, String lastName, String street, String pinCode, String phoneNumber) {
-		super();
+	
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.street = street;

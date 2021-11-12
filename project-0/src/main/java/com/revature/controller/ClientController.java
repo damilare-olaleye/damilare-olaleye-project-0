@@ -2,8 +2,11 @@ package com.revature.controller;
 
 import java.util.List;
 
+import com.revature.dto.AddOrUpdateAccountDTO;
 import com.revature.dto.AddOrUpdateClientDTO;
+import com.revature.model.Account;
 import com.revature.model.Client;
+import com.revature.service.AccountService;
 import com.revature.service.ClientService;
 
 import io.javalin.Javalin;
@@ -12,14 +15,15 @@ import io.javalin.http.Handler;
 public class ClientController {
 
 	private ClientService clientService;
+	private AccountService accountService;
 
 	public ClientController() {
 		this.clientService = new ClientService();
+		this.accountService = new AccountService();
 	}
 
-	// WE DO NOT NEED THIS
-	private Handler editClientFirstName = (ctx) -> {
-		String clientId = ctx.pathParam("id");
+	private Handler editClientById = (ctx) -> {
+		String clientId = ctx.pathParam("client_id");
 
 		AddOrUpdateClientDTO dto = ctx.bodyAsClass(AddOrUpdateClientDTO.class);
 		Client clientThatWasJustEdited = this.clientService.editClientFirstName(clientId, dto.getFirstName());
@@ -41,22 +45,8 @@ public class ClientController {
 		ctx.json(clients);
 	};
 
-	private Handler getClientById = (ctx) -> {
-		String id = ctx.pathParam("id");
-
-		Client c = this.clientService.getClientById(id);
-		ctx.json(c);
-	};
-
-	private Handler editClientById = (ctx) -> {
-		String id = ctx.pathParam("id");
-
-		this.clientService.editClientById(id);
-		
-	};
-
 	private Handler deleteClientById = (ctx) -> {
-		String id = ctx.pathParam("id");
+		String id = ctx.pathParam("client_id");
 
 		this.clientService.deleteClientById(id);
 
@@ -68,13 +58,23 @@ public class ClientController {
 
 	};
 
+	private Handler getClientById = (ctx) -> {
+		String id = ctx.pathParam("client_id");
+
+		Client c = this.clientService.getClientById(id);
+		ctx.json(c);
+	};
+
 	public void registerEndpoints(Javalin app) {
 
-		app.post("/clients", addClient);
-		app.get("/clients", getAllClients);  //works
-		app.get("/clients/{id}", getClientById); //works
-		app.put("/clients/{id}", editClientById);
-		app.delete("/clients/{id}", deleteClientById);
-		app.delete("/clients", deleteAllClients);
+		app.post("/clients", addClient); // works
+		app.get("/clients", getAllClients); // works
+		app.get("/clients/{client_id}", getClientById); // works
+		app.put("/clients/{client_id}", editClientById); // works
+		app.delete("/clients/{client_id}", deleteClientById); // works
+
+		app.delete("/clients", deleteAllClients); // not necessary
+
+
 	}
 }

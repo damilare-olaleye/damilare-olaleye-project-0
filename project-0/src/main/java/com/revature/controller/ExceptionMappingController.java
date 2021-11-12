@@ -4,7 +4,7 @@ import java.security.InvalidParameterException;
 
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.revature.dto.ExceptionMessageDTO;
-import com.revature.exceptions.ClientNotFoundException;
+import com.revature.exceptions.NotFoundException;
 
 import io.javalin.Javalin;
 
@@ -21,7 +21,7 @@ public class ExceptionMappingController {
 			ctx.json(new ExceptionMessageDTO(e));
 		});
 		
-		app.exception(ClientNotFoundException.class, (e, ctx) -> {
+		app.exception(NotFoundException.class, (e, ctx) -> {
 			ctx.status(404);
 			ctx.json(new ExceptionMessageDTO(e));
 		});

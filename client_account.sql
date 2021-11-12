@@ -1,30 +1,9 @@
--- clients_type table--- 
+DROP TABLE IF EXISTS account;
+DROP TABLE IF EXISTS client;
 
-DROP TABLE IF EXISTS client_account
-
-CREATE TABLE client_account(
-	client_id INTEGER, -- foreign key 
-	account_id VARCHAR(255), -- foreign key
-	
-	CONSTRAINT fk_client FOREIGN KEY(client_id)
-		REFERENCES client(client_id)
-);
-
-INSERT INTO client_account (client_id, account_id)
-VALUES
-(1,'12334343pl'),
-(2,'35263234pl'),
-(3,'12326344pl'),
-(4,'94023038pl'),
-(5,'94839448pl')
-
-SELECT * FROM client_account
 
 
 -- clients table ---- 
-
-DROP TABLE IF EXISTS client;
-
 CREATE TABLE client (
 	client_id SERIAL PRIMARY KEY,
 	client_first_name VARCHAR(255) NOT NULL,
@@ -55,48 +34,31 @@ SET client_first_name = 'Antonio'
 WHERE client_id = 1;
 
 
--- account_type table --
-
-DROP TABLE IF EXISTS account_type;
-
-CREATE TABLE account_type (
-	account_type_id SERIAL PRIMARY KEY,
-	account_type_description VARCHAR(255)
-);
-
-INSERT INTO account_type (account_type_description)
-VALUES 
-('Savings'),
-('Current'),
-('Others')
-
-SELECT *
-FROM account_type
-
-
--- account_info table --
-
-DROP TABLE IF EXISTS account; 
-
+-- account_info table -- 
 CREATE TABLE account (
 	account_id SERIAL PRIMARY KEY, -- to identify the account of the customer
 	account_status VARCHAR NOT NULL, -- active, suspended, or inactive
+	account_number BIGINT NOT NULL,
 	account_total_balance MONEY NOT NULL,
-	client_id INTEGER NOT NULL,
-	account_type_id INTEGER, -- foreign key 
-	
-	CONSTRAINT fk_account_type_id FOREIGN KEY(account_type_id)
-		REFERENCES account_type(account_type_id)
-
+	account_type VARCHAR NOT NULL, 
+	client_id INTEGER NOT NULL
 );
 
-INSERT INTO account (account_status, account_total_balance, client_id, account_type_id)
+DELETE FROM account WHERE client_id = 1
+
+INSERT INTO account (account_status, account_number, account_total_balance, account_type, client_id)
 VALUES 
-('active', 382009384, 1, 1),
-('suspended', 10, 2, 1),
-('inactive', 592000020, 2, 2),
-('active', 10000, 1, 1),
-('inactive', 8232, 1, 2)
+('active', 1234567, 27326327, 'checkings', 1),
+('suspended', 567890, 166780, 'savings', 1),
+('inactive', 1234567890, 59200020, 'others', 2),
+('active', 1234567890, 10000, 'checkings', 1),
+('inactive', 12890, 82332, 'savings', 2)
+
+SELECT * FROM account 
+
+UPDATE Account 
+	SET account_status = 'active', account_total_balance = '23234234', account_type = 'checkings'
+	WHERE account_id = 2 AND client_id = 2;
 
 SELECT * FROM account 
 

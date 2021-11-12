@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.revature.dao.ClientDAO;
 import com.revature.dto.AddOrUpdateClientDTO;
-import com.revature.exceptions.ClientNotFoundException;
+import com.revature.exceptions.NotFoundException;
 import com.revature.exceptions.InvalidParameterException;
 import com.revature.model.Client;
 
@@ -20,7 +20,7 @@ public class ClientService {
 
 	private ClientDAO clientDao;
 
-	// MOCK FOR TEST
+	// Mockito Mock Test
 	public ClientService(ClientDAO clientDao) {
 		this.clientDao = clientDao;
 	}
@@ -29,9 +29,11 @@ public class ClientService {
 		this.clientDao = new ClientDAO();
 	}
 
-	// WE DO NOT NEED THIS
+
 	public Client editClientFirstName(String clientId, String changedName)
-			throws ClientNotFoundException, InvalidParameterException, SQLException {
+			throws NotFoundException, InvalidParameterException, SQLException {
+		
+		logger.info("editClientFirstName(clientId, changedName) invoked");
 
 		try {
 			int id = Integer.parseInt(clientId);
@@ -39,7 +41,7 @@ public class ClientService {
 			Client clientIdToEdit = this.clientDao.getClientById(id);
 
 			if (clientIdToEdit == null) {
-				throw new ClientNotFoundException("Client with an id of " + clientId + "not found");
+				throw new NotFoundException("Client with an id of " + clientId + "not found");
 			}
 
 			AddOrUpdateClientDTO dto = new AddOrUpdateClientDTO(changedName, clientIdToEdit.getLastName(),
@@ -54,20 +56,22 @@ public class ClientService {
 		}
 	}
 
-	public void editClientById(String cliendId)
-			throws SQLException, ClientNotFoundException, InvalidParameterException {
+	public void editClientById(String cliendId, String fName)
+			throws SQLException, NotFoundException, InvalidParameterException {
 
+		logger.info("editClientById(clientId) invoked");
+		
 		try {
 			int id = Integer.parseInt(cliendId);
 
 			Client client = this.clientDao.getClientById(id);
 			if (client == null) {
-				throw new ClientNotFoundException(
-						"Client with id " + id + " was not found, and therefore, we client cannot be edited");
+				throw new NotFoundException(
+						"Client with id " + id + " was not found, and therefore, client cannot be edited");
 
 			}
 
-			this.clientDao.editClientId(id);
+			this.clientDao.editClientId(id, fName);
 
 		} catch (NumberFormatException e) {
 			throw new InvalidParameterException("Id supplied is not an int");
@@ -75,7 +79,7 @@ public class ClientService {
 	}
 
 	public List<Client> getAllClients() throws SQLException {
-		logger.info("getAllStudents() invoked");
+		logger.info("getAllClients() invoked");
 
 		List<Client> clients = this.clientDao.getAllClients();
 
@@ -83,7 +87,9 @@ public class ClientService {
 	}
 
 	public Client getClientById(String clientId)
-			throws SQLException, ClientNotFoundException, InvalidParameterException {
+			throws SQLException, NotFoundException, InvalidParameterException {
+
+		logger.info("getClientById(clientId) invoked");
 
 		try {
 			int id = Integer.parseInt(clientId);
@@ -91,18 +97,20 @@ public class ClientService {
 			Client c = this.clientDao.getClientById(id);
 
 			if (c == null) {
-				throw new ClientNotFoundException("Client with id of " + clientId + " was not found");
+				throw new NotFoundException("Client with id of " + id + " was not found");
 			}
 
 			return c;
 
 		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Id provided is noto an int convertable value");
+			throw new InvalidParameterException("Id provided is not an int convertable value");
 		}
 	}
 
-	// Double Check this
+	
 	public Client addClient(AddOrUpdateClientDTO dto) throws InvalidParameterException, SQLException {
+
+		logger.info("addClient(dto) invoked");
 
 		if (dto.getFirstName().trim().equals("")) {
 			throw new InvalidParameterException("First name cannot be blank");
@@ -136,15 +144,17 @@ public class ClientService {
 	}
 
 	public void deleteClientById(String cliendId)
-			throws SQLException, ClientNotFoundException, InvalidParameterException {
+			throws SQLException, NotFoundException, InvalidParameterException {
+
+		logger.info("deleteClientById(cliendId) invoked");
 
 		try {
 			int id = Integer.parseInt(cliendId);
 
 			Client client = this.clientDao.getClientById(id);
 			if (client == null) {
-				throw new ClientNotFoundException(
-						"Client with id " + id + " was not found, and therefore, we client cannot be deleted");
+				throw new NotFoundException(
+						"Client with id " + id + " was not found, and therefore, sorry the client cannot be deleted");
 
 			}
 
