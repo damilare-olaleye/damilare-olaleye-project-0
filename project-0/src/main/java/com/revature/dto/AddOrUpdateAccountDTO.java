@@ -5,8 +5,8 @@ import java.util.Objects;
 public class AddOrUpdateAccountDTO {
 	private int id;
 	private String accountStatus;
-	private float accountNumber;
-	private float accountTotalBalance;
+	private double accountNumber;
+	private double accountTotalBalance;
 	private String accountType;
 	private int clientId;
 
@@ -14,7 +14,7 @@ public class AddOrUpdateAccountDTO {
 
 	}
 
-	public AddOrUpdateAccountDTO(int id, String accountStatus, float accountNumber, float accountTotalBalance,
+	public AddOrUpdateAccountDTO(int id, String accountStatus, double accountNumber, double accountTotalBalance,
 			String accountType, int clientId) {
 		super();
 		this.id = id;
@@ -41,19 +41,19 @@ public class AddOrUpdateAccountDTO {
 		this.accountStatus = accountStatus;
 	}
 
-	public float getAccountNumber() {
+	public double getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(float accountNumber) {
+	public void setAccountNumber(double accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 
-	public float getAccountTotalBalance() {
+	public double getAccountTotalBalance() {
 		return accountTotalBalance;
 	}
 
-	public void setAccountTotalBalance(float accountTotalBalance) {
+	public void setAccountTotalBalance(double accountTotalBalance) {
 		this.accountTotalBalance = accountTotalBalance;
 	}
 
@@ -87,9 +87,9 @@ public class AddOrUpdateAccountDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		AddOrUpdateAccountDTO other = (AddOrUpdateAccountDTO) obj;
-		return Float.floatToIntBits(accountNumber) == Float.floatToIntBits(other.accountNumber)
+		return Double.doubleToLongBits(accountNumber) == Double.doubleToLongBits(other.accountNumber)
 				&& Objects.equals(accountStatus, other.accountStatus)
-				&& Float.floatToIntBits(accountTotalBalance) == Float.floatToIntBits(other.accountTotalBalance)
+				&& Double.doubleToLongBits(accountTotalBalance) == Double.doubleToLongBits(other.accountTotalBalance)
 				&& Objects.equals(accountType, other.accountType) && clientId == other.clientId && id == other.id;
 	}
 
@@ -99,6 +99,7 @@ public class AddOrUpdateAccountDTO {
 				+ accountNumber + ", accountTotalBalance=" + accountTotalBalance + ", accountType=" + accountType
 				+ ", clientId=" + clientId + "]";
 	}
+
 
 	  
 }

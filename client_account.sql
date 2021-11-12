@@ -27,19 +27,25 @@ VALUES
 SELECT *
 FROM client 
 
+SELECT * FROM client WHERE client_id = 2
+
 SELECT * FROM client WHERE client_id = 1
+
 
 UPDATE client
 SET client_first_name = 'Antonio'
 WHERE client_id = 1;
 
+UPDATE client 
+SET client_first_name = 'Xabi', client_last_name =  'Alonso', client_street = '1220 West Frankuft', client_pin_code = 1232, client_phone_number = 52638930283
+WHERE  client_id = 2;
 
 -- account_info table -- 
 CREATE TABLE account (
 	account_id SERIAL PRIMARY KEY, -- to identify the account of the customer
 	account_status VARCHAR NOT NULL, -- active, suspended, or inactive
-	account_number BIGINT NOT NULL,
-	account_total_balance MONEY NOT NULL,
+	account_number NUMERIC NOT NULL,
+	account_total_balance NUMERIC NOT NULL,
 	account_type VARCHAR NOT NULL, 
 	client_id INTEGER NOT NULL
 );
@@ -48,18 +54,26 @@ DELETE FROM account WHERE client_id = 1
 
 INSERT INTO account (account_status, account_number, account_total_balance, account_type, client_id)
 VALUES 
-('active', 1234567, 27326327, 'checkings', 1),
-('suspended', 567890, 166780, 'savings', 1),
-('inactive', 1234567890, 59200020, 'others', 2),
-('active', 1234567890, 10000, 'checkings', 1),
-('inactive', 12890, 82332, 'savings', 2)
+('active', 1234567, 7462, 'checkings', 1),
+('suspended', 567890, 194, 'savings', 1),
+('inactive', 1234567890, 2322, 'others', 2),
+('active', 1234567890, 9000, 'checkings', 1),
+('inactive', 12890, 100, 'savings', 2)
 
 SELECT * FROM account 
+
+SELECT * FROM account WHERE client_id = 2
+
+SELECT * FROM account WHERE client_id = 2 AND account_total_balance >= 200 AND account_total_balance <= 4000
 
 UPDATE Account 
 	SET account_status = 'active', account_total_balance = '23234234', account_type = 'checkings'
 	WHERE account_id = 2 AND client_id = 2;
 
 SELECT * FROM account 
+WHERE client_id  = 1;
 
+UPDATE account SET account_status = 'active', account_number = '1234567', account_total_balance = '27326327', account_type = 'checkings'
+		       WHERE client_id = '1' AND account_id = '1';
 
+SELECT * FROM account

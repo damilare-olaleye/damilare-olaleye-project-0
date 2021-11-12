@@ -106,9 +106,9 @@ public class ClientDAO {
 	public Client updateClient(int clientId, AddOrUpdateClientDTO client) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
-			String sql = "UPDATE client " + "SET client_first_name = ?," + "		  client_last_name = ?,"
-					+ "		  client_street = ?," + "		  client_pin_code = ?," + "       client_phone_number = ? "
-					+ "WHERE " + "client_id = ?;";
+			String sql = "UPDATE client "
+					+ "SET client_first_name = ?, client_last_name = ?, client_street = ?, client_pin_code = ?, client_phone_number = ?"
+					+ "WHERE  client_id = ?;";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -129,24 +129,6 @@ public class ClientDAO {
 
 		return new Client(clientId, client.getFirstName(), client.getLastName(), client.getStreet(),
 				client.getPinCode(), client.getPhoneNumber());
-	}
-
-	public void editClientId(int id, String fName) throws SQLException {
-
-		try (Connection con = JDBCUtility.getConnection()) {
-			String sql = "UPDATE client" + "SET client_first_name = ?," + " WHERE client_id = ?";
-
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, fName);
-			pstmt.setInt(2, id);
-
-			int numberOfRecordsEdited = pstmt.executeUpdate();
-
-			if (numberOfRecordsEdited != 1) {
-				throw new SQLException("Unable to edit client recored with id of " + id);
-			}
-		}
 	}
 
 	// DELETE CLIENT

@@ -25,10 +25,10 @@ public class ClientController {
 	private Handler editClientById = (ctx) -> {
 		String clientId = ctx.pathParam("client_id");
 
-		AddOrUpdateClientDTO dto = ctx.bodyAsClass(AddOrUpdateClientDTO.class);
-		Client clientThatWasJustEdited = this.clientService.editClientFirstName(clientId, dto.getFirstName());
+		Client newClient = this.clientService.editClientById(clientId);
 
-		ctx.json(clientThatWasJustEdited);
+		ctx.json(newClient);
+		ctx.status(201);
 	};
 
 	private Handler addClient = (ctx) -> {
@@ -70,7 +70,7 @@ public class ClientController {
 		app.post("/clients", addClient); // works
 		app.get("/clients", getAllClients); // works
 		app.get("/clients/{client_id}", getClientById); // works
-		app.put("/clients/{client_id}", editClientById); // works
+		app.put("/clients/{client_id}", editClientById); 
 		app.delete("/clients/{client_id}", deleteClientById); // works
 
 		app.delete("/clients", deleteAllClients); // not necessary

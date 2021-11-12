@@ -22,7 +22,6 @@ public class AccountService {
 	private AccountDAO accountDao;
 	private ClientDAO clientDao;
 
-	
 	public AccountService() {
 		this.accountDao = new AccountDAO();
 		this.clientDao = new ClientDAO();
@@ -138,14 +137,25 @@ public class AccountService {
 		}
 	}
 
-	public Account editAccountClientId(String clientId, String accountId, AddOrUpdateAccountDTO dto)
+	public Account editAccountClientId(String clientId, String accountId)
 			throws InvalidParameterException, SQLException, NotFoundException {
 
 		logger.info("editAccountClientId) invoked");
 
 		try {
+
 			int client_id = Integer.parseInt(clientId);
 			int account_id = Integer.parseInt(accountId);
+
+			Account accountIdToEdit = this.accountDao.getAccountById(client_id, account_id);
+
+			if (accountIdToEdit == null) {
+				throw new NotFoundException("Client with an id of " + client_id + " not found");
+			}
+
+			AddOrUpdateAccountDTO dto = new AddOrUpdateAccountDTO(account_id, accountIdToEdit.getAccountStatus(),
+					accountIdToEdit.getAccountNumber(), accountIdToEdit.getAccountTotalBalance(),
+					accountIdToEdit.getAccountType(), client_id);
 
 			Account updatedAccount = this.accountDao.updateAccount(client_id, account_id, dto);
 
@@ -172,23 +182,25 @@ public class AccountService {
 		}
 	}
 
-	public void deleteAccountByClientId(String clientId, int id)
+	public void deleteAccountByClientId(String clientId, String accountId)
 			throws InvalidParameterException, SQLException, NotFoundException {
 
-		logger.info("deleteAccountByClientId) invoked");
+		logger.info("deleteAccountByClientI(clientId, accountId) invoked");
 
 		try {
 
 			int client_id = Integer.parseInt(clientId);
+			int account_id = Integer.parseInt(accountId);
 
-			Account accountToDelete = this.accountDao.getAccountById(client_id, id);
+			Account accountToDelete = this.accountDao.getAccountById(client_id, account_id);
 
 			if (accountToDelete == null) {
 				throw new NotFoundException(
-						"Account with id " + id + " was not found, and therefore, account cannot be deleted");
-			}
+						"Account with id " + account_id + " was not found, and therefore, account cannot be deleted");
+			} else {
 
-			this.accountDao.deleteAccountId(client_id);
+				this.accountDao.deleteClientAndAccountId(client_id, account_id);
+			}
 
 		} catch (NumberFormatException e) {
 			throw new InvalidParameterException("Id supplied is not an int");

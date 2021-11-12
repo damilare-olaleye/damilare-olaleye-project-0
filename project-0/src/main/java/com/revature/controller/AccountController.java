@@ -61,9 +61,8 @@ public class AccountController {
 		String clientId = ctx.pathParam("client_id");
 
 		String accountId = ctx.pathParam("account_id");
-
-		AddOrUpdateAccountDTO dto = ctx.bodyAsClass(AddOrUpdateAccountDTO.class);
-		Account accounts = this.accountService.editAccountClientId(clientId, accountId, dto);
+		
+		Account accounts = this.accountService.editAccountClientId(clientId, accountId);
 
 		ctx.json(accounts);
 	};
@@ -71,10 +70,9 @@ public class AccountController {
 	private Handler deleteAccountByClientId = (ctx) -> {
 
 		String clientId = ctx.pathParam("client_id");
+		String accountId = ctx.pathParam("account_id");
 
-		AddOrUpdateAccountDTO dto = ctx.bodyAsClass(AddOrUpdateAccountDTO.class);
-
-		this.accountService.deleteAccountByClientId(clientId, dto.getId());
+		this.accountService.deleteAccountByClientId(clientId, accountId);
 
 	};
 
@@ -83,8 +81,8 @@ public class AccountController {
 		app.post("/clients/{client_id}/accounts", addAccount); // works
 		app.get("/clients/{client_id}/accounts", getAllAccountsByClientId); // works
 		app.get("/clients/{client_id}/accounts/{account_id}", getAllAccountsByAccountId); // works
-		app.put("/clients/{client_id}/accounts/{account_id}", editAccountsByClientId);
-		app.delete("/clients/{client_id}/accounts/{account_id}", deleteAccountByClientId);
+		app.put("/clients/{client_id}/accounts/{account_id}", editAccountsByClientId); // works
+		app.delete("/clients/{client_id}/accounts/{account_id}", deleteAccountByClientId); // works
 
 	}
 

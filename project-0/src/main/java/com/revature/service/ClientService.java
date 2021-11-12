@@ -30,51 +30,30 @@ public class ClientService {
 	}
 
 
-	public Client editClientFirstName(String clientId, String changedName)
+	public Client editClientById(String clientId)
 			throws NotFoundException, InvalidParameterException, SQLException {
 		
-		logger.info("editClientFirstName(clientId, changedName) invoked");
+		logger.info("editClientById(clientId) invoked");
 
 		try {
-			int id = Integer.parseInt(clientId);
+			
+			int client_id = Integer.parseInt(clientId);
 
-			Client clientIdToEdit = this.clientDao.getClientById(id);
+			Client clientIdToEdit = this.clientDao.getClientById(client_id);
 
 			if (clientIdToEdit == null) {
 				throw new NotFoundException("Client with an id of " + clientId + "not found");
 			}
 
-			AddOrUpdateClientDTO dto = new AddOrUpdateClientDTO(changedName, clientIdToEdit.getLastName(),
+			AddOrUpdateClientDTO dto = new AddOrUpdateClientDTO(clientId, clientIdToEdit.getLastName(),
 					clientIdToEdit.getPhoneNumber(), clientIdToEdit.getPinCode(), clientIdToEdit.getStreet());
 
-			Client updatedClient = this.clientDao.updateClient(id, dto);
+			Client updatedClient = this.clientDao.updateClient(client_id, dto);
 
 			return updatedClient;
 
 		} catch (NumberFormatException e) {
 			throw new InvalidParameterException("Id provided is not an int convertable value");
-		}
-	}
-
-	public void editClientById(String cliendId, String fName)
-			throws SQLException, NotFoundException, InvalidParameterException {
-
-		logger.info("editClientById(clientId) invoked");
-		
-		try {
-			int id = Integer.parseInt(cliendId);
-
-			Client client = this.clientDao.getClientById(id);
-			if (client == null) {
-				throw new NotFoundException(
-						"Client with id " + id + " was not found, and therefore, client cannot be edited");
-
-			}
-
-			this.clientDao.editClientId(id, fName);
-
-		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Id supplied is not an int");
 		}
 	}
 

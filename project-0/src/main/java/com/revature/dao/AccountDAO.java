@@ -23,8 +23,8 @@ public class AccountDAO {
 			PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 			pstmt.setString(1, dto.getAccountStatus());
-			pstmt.setFloat(2, dto.getAccountNumber());
-			pstmt.setFloat(3, dto.getAccountTotalBalance());
+			pstmt.setDouble(2, dto.getAccountNumber());
+			pstmt.setDouble(3, dto.getAccountTotalBalance());
 			pstmt.setString(4, dto.getAccountType());
 			pstmt.setInt(5, clientId);
 
@@ -108,21 +108,20 @@ public class AccountDAO {
 
 	}
 
-	// DOUBLE CHECK!!
-	public Account getAccountById(int account_id, int client_id) throws SQLException {
+	public Account getAccountById(int client_id, int account_id) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "SELECT * FROM account WHERE account_id = ? AND client_id = ?";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, client_id);
-			pstmt.setInt(2, account_id);
+			pstmt.setInt(1, account_id);
+			pstmt.setInt(2, client_id);
 
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				return new Account(account_id, rs.getString("account_status"), rs.getFloat("account_number"),
-						rs.getFloat("account_total_balance"), rs.getString("account_type"), rs.getInt("client_id"));
+						rs.getFloat("account_total_balance"), rs.getString("account_type"), client_id);
 
 			} else {
 				return null;
@@ -131,21 +130,21 @@ public class AccountDAO {
 	}
 
 	// UPDATE ACCOUNT
-	public Account updateAccount(int accountId, int clientId, AddOrUpdateAccountDTO account) throws SQLException {
+	public Account updateAccount(int clientId, int accountId, AddOrUpdateAccountDTO account) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
-			String sql = "UPDATE account SET account_status = 'active', account_number = '1234567', "
-					+ "account_total_balance = '27326327', account_type = ?"
-					+ "WHERE account_id = ? AND client_id = ?;";
+			String sql = "UPDATE account SET account_status = ?, account_number = ?,"
+					+ "account_total_balance = ?, account_type = ?"
+					+ "WHERE client_id = ? AND account_id = ?;";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, account.getAccountStatus());
-			pstmt.setFloat(2, account.getAccountNumber());
-			pstmt.setFloat(3, account.getAccountTotalBalance());
-//			pstmt.setInt(4, clientId);
-//			pstmt.setString(5, account.getAccountType());
-//			pstmt.setInt(6, accountId);
+			pstmt.setDouble(2, account.getAccountNumber());
+			pstmt.setDouble(3, account.getAccountTotalBalance());
+			pstmt.setString(4, account.getAccountType());
+			pstmt.setInt(5, clientId);
+			pstmt.setInt(6, accountId);
 
 			int numberOfRecordsUpdated = pstmt.executeUpdate();
 
@@ -153,10 +152,11 @@ public class AccountDAO {
 				throw new SQLException(
 						"Unable to update account record with id of " + accountId + ", no refrences to " + clientId);
 			}
+			
+			return new Account(accountId, account.getAccountStatus(), account.getAccountNumber(),
+					account.getAccountTotalBalance(), account.getAccountType(), clientId);
 		}
 
-		return new Account(accountId, account.getAccountStatus(), account.getAccountNumber(),
-				account.getAccountTotalBalance(), account.getAccountType(), clientId);
 	}
 
 	public void editAccountId(int clientId, int accountId) throws SQLException {
@@ -182,14 +182,15 @@ public class AccountDAO {
 	}
 
 	// DELETE ACCOUNT
-	public void deleteAccountId(int accountId) throws SQLException {
+	public void deleteClientAndAccountId(int clientId, int accountId) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
-			String sql = "DELETE FROM account WHERE account_id = ?";
+			String sql = "DELETE FROM account WHERE account_id = ? AND client_id = ?;";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
-			pstmt.setInt(1, accountId);
+			pstmt.setInt(1, clientId);
+			pstmt.setInt(2, accountId);
 
 			pstmt.executeUpdate();
 
@@ -197,19 +198,20 @@ public class AccountDAO {
 
 	}
 
-	public void deleteAccountByClientId(int clientId) throws SQLException {
+	public void deleteAccountByClientId(int clientId, int accountId) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
-			String sql = "DELETE FROM account WHERE client_id = ?";
+			String sql = "DELETE FROM account WHERE client_id = ? AND account_id = ?";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
 			pstmt.setInt(1, clientId);
+			pstmt.setInt(2, accountId);
 
 			int numberOfRecordsDeleted = pstmt.executeUpdate();
 
 			if (numberOfRecordsDeleted != 1) {
-				throw new SQLException("Unable to delete account record with client id of " + clientId);
+				throw new SQLException("Unable to delete account" + accountId + "record with client id of " + clientId);
 			}
 		}
 	}
@@ -217,7 +219,7 @@ public class AccountDAO {
 	public void deleteAccount(int client_id, int account_id) throws SQLException {
 		try (Connection con = JDBCUtility.getConnection()) {
 
-			String sql = "DELETE FROM account WHERE client_id = ? AND account_id = ?;";
+			String sql = "DELETE FROM account WHERE client_id = ? AND account_id = ?";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, client_id);
