@@ -1,7 +1,6 @@
 package com.revature.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.dto.AddOrUpdateClientDTO;
-import com.revature.model.Account;
 import com.revature.model.Client;
 import com.revature.util.JDBCUtility;
 
@@ -51,7 +49,6 @@ public class ClientDAO {
 		}
 	}
 
-
 	// READ CLIENT
 	public List<Client> getAllClients() throws SQLException {
 
@@ -89,9 +86,9 @@ public class ClientDAO {
 			pstmt.setInt(1, id);
 
 			ResultSet rs = pstmt.executeQuery();
-			
+
 			if (rs.next()) {
-				
+
 				return new Client(rs.getInt("client_id"), rs.getString("client_first_name"),
 						rs.getString("client_last_name"), rs.getString("client_Street"),
 						rs.getString("client_pin_code"), rs.getString("client_phone_number"));

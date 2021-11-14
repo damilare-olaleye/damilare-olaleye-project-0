@@ -15,11 +15,10 @@ import com.revature.util.JDBCUtility;
 public class AccountDAO {
 
 	// CRUD
-		/*
-		 * 1. C -> CREATE 2. R -> READ 3. U -> UPDATE 4. D -> DELETE
-		 */
+	/*
+	 * 1. C -> CREATE 2. R -> READ 3. U -> UPDATE 4. D -> DELETE
+	 */
 
-	
 	// CREATE ACCOUNT
 	public Account addIntoAccount(int clientId, AddOrUpdateAccountDTO dto) throws SQLException {
 
@@ -140,8 +139,7 @@ public class AccountDAO {
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "UPDATE account SET account_status = ?, account_number = ?,"
-					+ "account_total_balance = ?, account_type = ?"
-					+ "WHERE client_id = ? AND account_id = ?;";
+					+ "account_total_balance = ?, account_type = ?" + "WHERE client_id = ? AND account_id = ?;";
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
@@ -158,7 +156,7 @@ public class AccountDAO {
 				throw new SQLException(
 						"Unable to update account record with id of " + accountId + ", no refrences to " + clientId);
 			}
-			
+
 			return new Account(accountId, account.getAccountStatus(), account.getAccountNumber(),
 					account.getAccountTotalBalance(), account.getAccountType(), clientId);
 		}
@@ -188,7 +186,7 @@ public class AccountDAO {
 	}
 
 	// DELETE ACCOUNT
-	
+
 	public void deleteClientAndAccountId(int clientId, int accountId) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {
