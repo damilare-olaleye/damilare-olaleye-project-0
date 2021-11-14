@@ -43,7 +43,7 @@ jobs:
           path: staging
   
   build-docker-image:
-    name: Publish Project0 to Docker Hub
+    name: Publish to Docker Hub
     runs-on: macos-latest
     needs: [build_and_test]
     
@@ -51,7 +51,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build Docker image
-        run: docker build -t $REPO:latest -t $REPO:${GITHUB_SHA::8} .
+      - name: Build Container image
+        run: docker build -t ${{ secrets.DOCKER_REPO }}:latest .
       - name: Publish Docker image
-        run: docker push $REPO
+        run: docker push ${{ secrets.DOCKER_REPO }}
