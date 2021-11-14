@@ -40,6 +40,9 @@ UPDATE client
 SET client_first_name = 'Xabi', client_last_name =  'Alonso', client_street = '1220 West Frankuft', client_pin_code = 1232, client_phone_number = 52638930283
 WHERE  client_id = 2;
 
+SELECT *
+FROM client 
+
 -- account_info table -- 
 CREATE TABLE account (
 	account_id SERIAL PRIMARY KEY, -- to identify the account of the customer
@@ -63,6 +66,8 @@ VALUES
 SELECT * FROM account 
 
 SELECT * FROM account WHERE client_id = 2
+
+SELECT * FROM account WHERE client_id = 1 AND account_id = 1
 
 SELECT * FROM account WHERE client_id = 2 AND account_total_balance >= 200 AND account_total_balance <= 4000
 

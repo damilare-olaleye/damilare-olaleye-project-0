@@ -2,9 +2,6 @@ package com.revature.service;
 
 import java.sql.SQLException;
 import java.util.List;
-
-import org.apache.commons.validator.routines.DateValidator;
-import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,24 +26,23 @@ public class ClientService {
 		this.clientDao = new ClientDAO();
 	}
 
+	public Client editClientById(String clientId, String editFirstName, String editLastName, String editPhoneNumber,
+			String editPinCode, String editStreet) throws NotFoundException, SQLException, InvalidParameterException {
 
-	public Client editClientById(String clientId)
-			throws NotFoundException, InvalidParameterException, SQLException {
-		
 		logger.info("editClientById(clientId) invoked");
 
 		try {
-			
+
 			int client_id = Integer.parseInt(clientId);
 
 			Client clientIdToEdit = this.clientDao.getClientById(client_id);
 
 			if (clientIdToEdit == null) {
-				throw new NotFoundException("Client with an id of " + clientId + "not found");
+				throw new NotFoundException("Client with an id of " + clientId + " not found");
 			}
 
-			AddOrUpdateClientDTO dto = new AddOrUpdateClientDTO(clientId, clientIdToEdit.getLastName(),
-					clientIdToEdit.getPhoneNumber(), clientIdToEdit.getPinCode(), clientIdToEdit.getStreet());
+			AddOrUpdateClientDTO dto = new AddOrUpdateClientDTO(editFirstName, editLastName, editPhoneNumber,
+					editPinCode, editStreet);
 
 			Client updatedClient = this.clientDao.updateClient(client_id, dto);
 
@@ -65,8 +61,7 @@ public class ClientService {
 		return clients;
 	}
 
-	public Client getClientById(String clientId)
-			throws SQLException, NotFoundException, InvalidParameterException {
+	public Client getClientById(String clientId) throws SQLException, NotFoundException, InvalidParameterException {
 
 		logger.info("getClientById(clientId) invoked");
 
@@ -86,44 +81,49 @@ public class ClientService {
 		}
 	}
 
-	
 	public Client addClient(AddOrUpdateClientDTO dto) throws InvalidParameterException, SQLException {
 
 		logger.info("addClient(dto) invoked");
 
-		if (dto.getFirstName().trim().equals("")) {
-			throw new InvalidParameterException("First name cannot be blank");
+		try {
+
+			if (dto.getFirstName().trim().equals("")) {
+				throw new InvalidParameterException("First name cannot be blank");
+			}
+
+			if (dto.getLastName().trim().equals("")) {
+				throw new InvalidParameterException("Last name cannot be blank");
+
+			}
+			if (dto.getPinCode().trim().equals("")) {
+				throw new InvalidParameterException("PinCode cannot be blank");
+			}
+
+			if (dto.getStreet().trim().equals("")) {
+				throw new InvalidParameterException("PinCode cannot be blank");
+			}
+
+			if (dto.getPhoneNumber().trim().equals("")) {
+				throw new InvalidParameterException("Phone Number cannot be blank");
+			}
+
+			dto.setFirstName(dto.getFirstName().trim());
+			dto.setLastName(dto.getLastName().trim());
+			dto.setStreet(dto.getStreet().trim());
+			dto.setPinCode(dto.getPinCode().trim());
+			dto.setPhoneNumber(dto.getPhoneNumber().trim());
+
+			Client insertedClient = this.clientDao.addClient(dto);
+
+			return insertedClient;
+
+		} catch (NumberFormatException e) {
+			throw new InvalidParameterException("Invalid parameter was thrown");
 		}
 
-		if (dto.getLastName().trim().equals("")) {
-			throw new InvalidParameterException("Last name cannot be blank");
-			
-		}
-		if (dto.getPinCode().trim().equals("")) {
-			throw new InvalidParameterException("PinCode cannot be blank");
-		}
-
-		if (dto.getStreet().trim().equals("")) {
-			throw new InvalidParameterException("PinCode cannot be blank");
-		}
-
-		if (dto.getPhoneNumber().trim().equals("")) {
-			throw new InvalidParameterException("Phone Number cannot be blank");
-		}
-
-		dto.setFirstName(dto.getFirstName().trim());
-		dto.setLastName(dto.getLastName().trim());
-		dto.setStreet(dto.getStreet().trim());
-		dto.setPinCode(dto.getPinCode().trim());
-		dto.setPhoneNumber(dto.getPhoneNumber().trim());
-
-		Client insertedClient = this.clientDao.addClient(dto);
-
-		return insertedClient;
 	}
 
-	public void deleteClientById(String cliendId)
-			throws SQLException, NotFoundException, InvalidParameterException {
+	public void deleteClientById(String cliendId) throws SQLException, NotFoundException, InvalidParameterException {
 
 		logger.info("deleteClientById(cliendId) invoked");
 

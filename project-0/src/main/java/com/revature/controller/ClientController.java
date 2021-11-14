@@ -2,9 +2,7 @@ package com.revature.controller;
 
 import java.util.List;
 
-import com.revature.dto.AddOrUpdateAccountDTO;
 import com.revature.dto.AddOrUpdateClientDTO;
-import com.revature.model.Account;
 import com.revature.model.Client;
 import com.revature.service.AccountService;
 import com.revature.service.ClientService;
@@ -25,7 +23,10 @@ public class ClientController {
 	private Handler editClientById = (ctx) -> {
 		String clientId = ctx.pathParam("client_id");
 
-		Client newClient = this.clientService.editClientById(clientId);
+		AddOrUpdateClientDTO dto = ctx.bodyAsClass(AddOrUpdateClientDTO.class);
+
+		Client newClient = this.clientService.editClientById(clientId, dto.getFirstName(), dto.getLastName(),
+				dto.getPhoneNumber(), dto.getPinCode(), dto.getStreet());
 
 		ctx.json(newClient);
 		ctx.status(201);
@@ -50,11 +51,15 @@ public class ClientController {
 
 		this.clientService.deleteClientById(id);
 
+		ctx.status(201);
+
 	};
 
 	private Handler deleteAllClients = (ctx) -> {
 
 		this.clientService.deleteAllClient();
+
+		ctx.status(201);
 
 	};
 
@@ -70,11 +75,10 @@ public class ClientController {
 		app.post("/clients", addClient); // works
 		app.get("/clients", getAllClients); // works
 		app.get("/clients/{client_id}", getClientById); // works
-		app.put("/clients/{client_id}", editClientById); 
+		app.put("/clients/{client_id}", editClientById);
 		app.delete("/clients/{client_id}", deleteClientById); // works
 
 		app.delete("/clients", deleteAllClients); // not necessary
-
 
 	}
 }

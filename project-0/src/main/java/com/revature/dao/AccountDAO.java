@@ -14,6 +14,12 @@ import com.revature.util.JDBCUtility;
 
 public class AccountDAO {
 
+	// CRUD
+		/*
+		 * 1. C -> CREATE 2. R -> READ 3. U -> UPDATE 4. D -> DELETE
+		 */
+
+	
 	// CREATE ACCOUNT
 	public Account addIntoAccount(int clientId, AddOrUpdateAccountDTO dto) throws SQLException {
 
@@ -182,6 +188,7 @@ public class AccountDAO {
 	}
 
 	// DELETE ACCOUNT
+	
 	public void deleteClientAndAccountId(int clientId, int accountId) throws SQLException {
 
 		try (Connection con = JDBCUtility.getConnection()) {

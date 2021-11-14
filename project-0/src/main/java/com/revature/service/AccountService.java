@@ -1,7 +1,9 @@
 package com.revature.service;
 
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import com.revature.dto.AddOrUpdateAccountDTO;
 import com.revature.exceptions.InvalidParameterException;
 import com.revature.exceptions.NotFoundException;
 import com.revature.model.Account;
+import com.revature.model.Client;
 
 import io.javalin.http.Context;
 
@@ -31,6 +34,7 @@ public class AccountService {
 	private AccountService(AccountDAO accountDao, ClientDAO clientDao) {
 		this.accountDao = accountDao;
 		this.clientDao = clientDao;
+
 	}
 
 	public Account addAccount(String client_id, AddOrUpdateAccountDTO dto)
@@ -38,29 +42,41 @@ public class AccountService {
 
 		logger.info("addClient(dto) invoked");
 
-//		if (dto.getAccountStatus().trim().equals("") || dto.getAccountStatus() != "active"
-//				|| dto.getAccountStatus() != "suspended" || dto.getAccountStatus() != "inactive") {
-//			throw new InvalidParameterException(
-//					"Account Status cannot be blank, and/or must be active, inactive, or suspended");
-//		}
-//
-//		if (dto.getAccountTotalBalance() < 0) {
-//			throw new InvalidParameterException("Total account balance cannot be less than zero");
-//
-//		}
-//
-//		if (dto.getClientId() < 1) {
-//			throw new InvalidParameterException("Client ID cannot be less than 1");
-//		}
-//
-//		if (dto.getAccountType().trim().equals("") || dto.getAccountType() != "savings"
-//				|| dto.getAccountType() != "checkings" || dto.getAccountType() != "others") {
-//			throw new InvalidParameterException(
-//					"Account type cannot be blank and must be either savings, checkings, or others ");
-//		}
+		// verify account status
+		Set<String> validStatus = new HashSet<>();
+		validStatus.add("active");
+		validStatus.add("inactive");
+		validStatus.add("invalid");
+
+		// validate account status
+		if (!validStatus.contains(dto.getAccountStatus())) {
+			throw new InvalidParameterException("You entered an invalid account status");
+		}
+
+		// verify account type
+		Set<String> validAccountType = new HashSet<>();
+		validAccountType.add("savings");
+		validAccountType.add("checkings");
+		validAccountType.add("others");
+
+		// validate account type
+		if (!validAccountType.contains(dto.getAccountType())) {
+			throw new InvalidParameterException(
+					"You entered an invalid account type. Please enter either savings, checking, or others");
+		}
+
+		// validate total account balance
+		if (dto.getAccountTotalBalance() < 0) {
+			throw new InvalidParameterException("Total account balance cannot be less than zero");
+
+		}
 
 		try {
 			int clientId = Integer.parseInt(client_id);
+
+			if (clientId == -1) {
+				throw new InvalidParameterException("ClientId cannot be negative 1. Please enter the right client ID");
+			}
 
 			Account account = this.accountDao.addIntoAccount(clientId, dto);
 
@@ -73,37 +89,50 @@ public class AccountService {
 
 	}
 
-	public List<Account> getAllAccountsByClientId(String clientId, Context ctx) throws SQLException {
+	// THIS GET ALL ACCOUNT ASSOCIATED WITH CLIENTS AND CLIENT ID
+	// PLUS WE CHECK IF CLIENT ID AMOUNT BALANCE IS GREATER OR LESS THAN
 
-		List<Account> accounts;
+	public List<Account> getAllAccountsByClientId(String clientId, Context ctx)
+			throws SQLException, InvalidParameterException, NotFoundException {
 
-		int client_id = Integer.parseInt(clientId);
+		try {
 
-		if (ctx.queryParam("amountGreaterThan") != null && ctx.queryParam("amountLessThan") != null) {
-			int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
-			int lessThan = Integer.parseInt(ctx.queryParam("amountLessThan"));
+			List<Account> accounts;
+			
+			int client_id = Integer.parseInt(clientId);
 
-			accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, lessThan);
+			if (ctx.queryParam("amountGreaterThan") != null && ctx.queryParam("amountLessThan") != null) {
+				int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
+				int lessThan = Integer.parseInt(ctx.queryParam("amountLessThan"));
 
-		} else if (ctx.queryParam("amountLessThan") != null) {
+				accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, lessThan);
 
-			int lessThan = Integer.parseInt(ctx.queryParam("amountLessThan"));
+			} else if (ctx.queryParam("amountLessThan") != null) {
 
-			accounts = this.accountDao.getAllAccountByClientsId(client_id, 400, lessThan);
+				int lessThan = Integer.parseInt(ctx.queryParam("amountLessThan"));
 
-		} else if (ctx.queryParam("amountGreaterThan") != null) {
+				accounts = this.accountDao.getAllAccountByClientsId(client_id, 200, lessThan);
 
-			int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
+			} else if (ctx.queryParam("amountGreaterThan") != null) {
 
-			accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, 2000);
+				int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
 
-		} else {
-			accounts = this.accountDao.getAllAccountByClientsId(client_id, 0, 400);
+				accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, 2000);
 
+			} else {
+				accounts = this.accountDao.getAllAccountByClientsId(client_id, 200, 2000);
+
+			}
+
+			return accounts;
+
+		} catch (NumberFormatException e) {
+			throw new InvalidParameterException("Client not found");
 		}
 
-		return accounts;
 	}
+
+	// THIS GET ALL ACCOUNT ASSOCIATED WITH CLIENTS
 
 	public List<Account> getAllAccounts() throws SQLException, NotFoundException, InvalidParameterException {
 
@@ -111,9 +140,15 @@ public class AccountService {
 
 		List<Account> account = this.accountDao.getAllAccounts();
 
-		return account;
+		if (account == null) {
+			throw new NotFoundException("Accounts not found");
+		} else {
+			return account;
+		}
 
 	}
+
+	// THIS ACCOUNT ASSOCIATED WITH CLIENTS
 
 	public Account getAccount(String clientId, String accountId)
 			throws InvalidParameterException, SQLException, NotFoundException {
@@ -137,6 +172,8 @@ public class AccountService {
 		}
 	}
 
+	// EDIT ACCOUNT ID IF AND ONLY WE HAVE CLIENT ID
+
 	public Account editAccountClientId(String clientId, String accountId)
 			throws InvalidParameterException, SQLException, NotFoundException {
 
@@ -150,7 +187,8 @@ public class AccountService {
 			Account accountIdToEdit = this.accountDao.getAccountById(client_id, account_id);
 
 			if (accountIdToEdit == null) {
-				throw new NotFoundException("Client with an id of " + client_id + " not found");
+				throw new NotFoundException(
+						"Client with an id of " + client_id + " with account id of " + account_id + " not found");
 			}
 
 			AddOrUpdateAccountDTO dto = new AddOrUpdateAccountDTO(account_id, accountIdToEdit.getAccountStatus(),
@@ -162,10 +200,12 @@ public class AccountService {
 			return updatedAccount;
 
 		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Id supplied is not an int value");
+			throw new InvalidParameterException("Id supplied is not an integer value");
 		}
 
 	}
+
+	// DELETING THE ENTIRE ACCOUNT. NOT NEEDED
 
 	public void deleteAccount(String clientId, String accountId) throws InvalidParameterException, SQLException {
 
@@ -178,9 +218,11 @@ public class AccountService {
 
 			this.accountDao.deleteAccount(client_id, account_id);
 		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Id supplied is not an int value");
+			throw new InvalidParameterException("Id supplied is not an integer value");
 		}
 	}
+
+	// DELETE ACCOUNT ID IF AND ONLY IT MATCHES WITH CLIENT ID
 
 	public void deleteAccountByClientId(String clientId, String accountId)
 			throws InvalidParameterException, SQLException, NotFoundException {
@@ -203,7 +245,7 @@ public class AccountService {
 			}
 
 		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Id supplied is not an int");
+			throw new InvalidParameterException("Id supplied is not an integer value");
 		}
 
 	}
