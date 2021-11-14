@@ -31,7 +31,6 @@ jobs:
           java-version: 11
           check-latest: true
       - run: mvn -B package --file project-0/pom.xml -DskipTests
-      - run: mvn --batch-mode --update-snapshots verify
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v2
         with:
