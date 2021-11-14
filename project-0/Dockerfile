@@ -1,8 +1,8 @@
 FROM maven:3.8.3-jdk-11 AS build
 RUN mkdir -p /workspace
 WORKDIR /workspace
-COPY pom.xml /workspace
-COPY src /workspace/src
+COPY . /workspace
+COPY . /workspace/src
 RUN mvn -B package --file project-0/pom.xml -DskipTests
 
 FROM openjdk:11-jdk
