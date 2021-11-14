@@ -25,22 +25,22 @@ jobs:
       - name: Build Project0 with Maven
         run: mvn -B package --file project-0/pom.xml
         
-#   publish-jobs:
-#     runs-on: macos-latest
-#     needs: [build_and_test]
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-java@v2
-#         with: 
-#           distribution: 'adopt'
-#           java-version: 8
-#           check-latest: true
-#       - run: mvn -B package --file project-0/pom.xml -DskipTests
-#       - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
-#       - uses: actions/upload-artifact@v2
-#         with:
-#           name: Package
-#           path: staging
+  publish-jobs:
+    runs-on: macos-latest
+    needs: [build_and_test]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with: 
+          distribution: 'adopt'
+          java-version: 8
+          check-latest: true
+      - run: mvn -B package --file project-0/pom.xml -DskipTests
+      - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: staging
   
   build-docker-image:
     name: Publish Project0 to Docker Hub
