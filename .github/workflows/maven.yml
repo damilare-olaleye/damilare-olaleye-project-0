@@ -18,7 +18,7 @@ jobs:
           cache: maven
           
       - name: Build Project0 with Maven
-        run: mvn -B package --file project-0/pom.xml
+        run: mvn -B package --file pom.xml
       - run: mvn --batch-mode --update-snapshots verify
       - run: mkdir staging && cp target/*.jar staging
       - uses: actions/upload-artifact@v2
