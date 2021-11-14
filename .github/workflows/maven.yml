@@ -1,14 +1,10 @@
-name: Master Branch
+name: Project Zero
 
-on:
-  push:
-    branches:
-      - 'main'
+on: [push, pull_request]
 
 jobs:
-
-  test:
-    name: Project0 -Test - Units & Integrations 
+  build_and_test:
+    name: project0
     runs-on: macos-latest
 
     steps:
@@ -16,38 +12,46 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v2
         with:
-          java-version: 8
+          java-version: '8'
           distribution: 'adopt'
-          
+        
       - name: Cache Maven packages to speed up build
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-     
-      - name: Project0 Package
-        run: mvn -B clean package -DskipTests
-      - name: Maven Verify
-        run: mvn -B clean verify -Pintegration-test
-
- 
-  docker:
-    name: Publish Project0 - Docker Hub
+          
+      - name: Build Project0 with Maven
+        run: mvn -B package --file project-0/pom.xml
+        
+  publish-jobs:
     runs-on: macos-latest
-    needs: [test]
-    env:
-      REPO: ${{ secrets.DOCKER_REPO }}
-
+    needs: [build_and_test]
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 8
-        uses: actions/setup-java@v2
-        with:
+      - uses: actions/setup-java@v2
+        with: 
+          distribution: 'adopt'
           java-version: 8
+          check-latest: true
+      - run: mvn -B package --file project-0/pom.xml -DskipTests
+      - run: mkdir staging && cp target/*jar-with-dependencies.jar staging
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: staging
+  
+  build-docker-image:
+    name: Publish Project0 to Docker Hub
+    runs-on: macos-latest
+    needs: [build_and_test]
+    
+    steps:
+      - uses: actions/checkout@v2
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build Docker image
-        run: docker build -t $REPO:latest -t $REPO:${GITHUB_SHA::8} .
+      - name: Build Container image
+        run: docker build -t ${{ secrets.DOCKER_REPO }}:latest .
       - name: Publish Docker image
-        run: docker push $REPO
+        run: docker push ${{ secrets.DOCKER_REPO }}
