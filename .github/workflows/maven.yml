@@ -1,9 +1,6 @@
 name: Project Zero
 
-on: 
-  push:
-    tags:
-       - "v*.*.*"
+on: [push, pull_request]
 
 
 jobs:
