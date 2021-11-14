@@ -3,9 +3,9 @@ RUN mkdir -p /workspace
 WORKDIR /workspace
 COPY pom.xml /workspace
 COPY src /workspace/src
-RUN mvn -B package --file project-0/pom.xml -DskipTests
+RUN mvn -B -f project-0/pom.xml clean package -DskipTests
 
 FROM openjdk:14-slim
 COPY --from=build /workspace/target/*jar-with-dependencies.jar app.jar
-EXPOSE 6379
+EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
