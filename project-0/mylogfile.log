@@ -2,3 +2,113 @@
 				org.eclipse.jetty.util.log - Logging initialized @654ms to org.eclipse.jetty.util.log.Slf4jLog
 11 Nov 2021 - 15:33:15.960 [qtp1608230649-18] INFO 
 				com.revature.main.Application - GET request received to the /clients/4/accounts endpoint
+16 Nov 2021 - 08:46:30.578 [main] INFO 
+				org.eclipse.jetty.util.log - Logging initialized @568ms to org.eclipse.jetty.util.log.Slf4jLog
+16 Nov 2021 - 08:46:45.874 [qtp188576144-16] INFO 
+				com.revature.main.Application - GET request received to the /clients endpoint
+16 Nov 2021 - 08:46:45.875 [qtp188576144-16] INFO 
+				com.revature.service.ClientService - getAllClients() invoked
+16 Nov 2021 - 08:46:45.875 [qtp188576144-16] INFO 
+				com.revature.dao.ClientDAO - getAllClients() invoked
+16 Nov 2021 - 08:46:50.761 [qtp188576144-13] INFO 
+				com.revature.main.Application - GET request received to the /clients/15 endpoint
+16 Nov 2021 - 08:46:50.764 [qtp188576144-13] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:46:50.765 [qtp188576144-13] INFO 
+				com.revature.dao.ClientDAO - getAllClients(id) invoked
+16 Nov 2021 - 08:47:11.051 [qtp188576144-18] INFO 
+				com.revature.main.Application - PUT request received to the /clients/1 endpoint
+16 Nov 2021 - 08:47:11.104 [qtp188576144-18] INFO 
+				com.revature.service.ClientService - editClientById(clientId) invoked
+16 Nov 2021 - 08:47:11.104 [qtp188576144-18] INFO 
+				com.revature.dao.ClientDAO - getAllClients(id) invoked
+16 Nov 2021 - 08:47:11.688 [qtp188576144-18] INFO 
+				com.revature.dao.ClientDAO - updateClient(clientId, client) invoked
+16 Nov 2021 - 08:47:19.063 [qtp188576144-17] INFO 
+				com.revature.main.Application - GET request received to the /clients/2/accounts/ endpoint
+16 Nov 2021 - 08:47:19.065 [qtp188576144-17] INFO 
+				com.revature.dao.ClientDAO - getAllAccountByClientsId(client_id, amountGreaterThan, amountLessThan) invoked
+16 Nov 2021 - 08:47:26.313 [qtp188576144-18] INFO 
+				com.revature.main.Application - GET request received to the /clients/1/accounts/1 endpoint
+16 Nov 2021 - 08:47:26.321 [qtp188576144-18] INFO 
+				com.revature.service.AccountService - getAllAccounts() invoked
+16 Nov 2021 - 08:47:26.321 [qtp188576144-18] INFO 
+				com.revature.dao.ClientDAO - getAllAccounts() invoked
+16 Nov 2021 - 08:47:32.386 [qtp188576144-17] INFO 
+				com.revature.main.Application - PUT request received to the /clients/1/accounts/10 endpoint
+16 Nov 2021 - 08:47:32.390 [qtp188576144-17] INFO 
+				com.revature.service.AccountService - editAccountClientId) invoked
+16 Nov 2021 - 08:47:32.390 [qtp188576144-17] INFO 
+				com.revature.dao.ClientDAO - getAccountById(client_id, account_id) invoked
+16 Nov 2021 - 08:47:37.170 [qtp188576144-18] INFO 
+				com.revature.main.Application - PUT request received to the /clients/1/accounts/1 endpoint
+16 Nov 2021 - 08:47:37.175 [qtp188576144-18] INFO 
+				com.revature.service.AccountService - editAccountClientId) invoked
+16 Nov 2021 - 08:47:37.176 [qtp188576144-18] INFO 
+				com.revature.dao.ClientDAO - getAccountById(client_id, account_id) invoked
+16 Nov 2021 - 08:47:37.766 [qtp188576144-18] INFO 
+				com.revature.dao.ClientDAO - updateAccount(clientId, accountId, account) invoked
+16 Nov 2021 - 08:47:55.578 [qtp188576144-17] INFO 
+				com.revature.main.Application - PUT request received to the /clients/66 endpoint
+16 Nov 2021 - 08:47:55.593 [qtp188576144-17] INFO 
+				com.revature.service.ClientService - editClientById(clientId) invoked
+16 Nov 2021 - 08:47:55.594 [qtp188576144-17] INFO 
+				com.revature.dao.ClientDAO - getAllClients(id) invoked
+16 Nov 2021 - 08:48:01.752 [qtp188576144-18] INFO 
+				com.revature.main.Application - PUT request received to the /clients/6 endpoint
+16 Nov 2021 - 08:48:01.763 [qtp188576144-18] INFO 
+				com.revature.service.ClientService - editClientById(clientId) invoked
+16 Nov 2021 - 08:48:01.763 [qtp188576144-18] INFO 
+				com.revature.dao.ClientDAO - getAllClients(id) invoked
+16 Nov 2021 - 08:48:02.617 [qtp188576144-18] INFO 
+				com.revature.dao.ClientDAO - updateClient(clientId, client) invoked
+16 Nov 2021 - 08:48:37.226 [main] INFO 
+				com.revature.service.AccountService - getAllAccounts() invoked
+16 Nov 2021 - 08:48:37.270 [main] INFO 
+				com.revature.service.AccountService - addClient(dto) invoked
+16 Nov 2021 - 08:48:37.279 [main] INFO 
+				com.revature.service.AccountService - getAllAccounts() invoked
+16 Nov 2021 - 08:48:37.280 [main] INFO 
+				com.revature.service.AccountService - addClient(dto) invoked
+16 Nov 2021 - 08:48:37.281 [main] INFO 
+				com.revature.service.AccountService - addClient(dto) invoked
+16 Nov 2021 - 08:48:37.282 [main] INFO 
+				com.revature.service.ClientService - getAllClients() invoked
+16 Nov 2021 - 08:48:37.284 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.285 [main] INFO 
+				com.revature.service.ClientService - addClient(dto) invoked
+16 Nov 2021 - 08:48:37.285 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.286 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.286 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.286 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.287 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.288 [main] INFO 
+				com.revature.service.ClientService - editClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.288 [main] INFO 
+				com.revature.service.ClientService - editClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.289 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.289 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.290 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.291 [main] INFO 
+				com.revature.service.ClientService - getAllClients() invoked
+16 Nov 2021 - 08:48:37.291 [main] INFO 
+				com.revature.service.ClientService - getClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.292 [main] INFO 
+				com.revature.service.ClientService - editClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.294 [main] INFO 
+				com.revature.service.ClientService - editClientById(clientId) invoked
+16 Nov 2021 - 08:48:37.297 [main] INFO 
+				com.revature.service.ClientService - addClient(dto) invoked
+16 Nov 2021 - 08:48:37.298 [main] INFO 
+				com.revature.service.ClientService - addClient(dto) invoked
+16 Nov 2021 - 08:48:37.299 [main] INFO 
+				com.revature.service.ClientService - addClient(dto) invoked

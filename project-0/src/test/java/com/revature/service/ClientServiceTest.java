@@ -441,9 +441,22 @@ public class ClientServiceTest {
 
 	// POSITIVE
 
-	@Test
-	public void testDeleteClientByIdPositve() {
-
-	}
+//	@Test
+//	public void testDeleteClientByIdPositve() throws SQLException {
+//		
+//		//ARRANGE
+//		
+//		ClientDAO mockClientDao = mock(ClientDAO.class);
+//		
+//		when(mockClientDao.deleteClientId(eq(7))).thenReturn(new Client(7, "Lori", "Grenier", "3036 W Cubec Rd", "3726", "9002839857"));
+//		
+//		ClientService clientService = new ClientService(mockClientDao);
+//		
+//		// ACT
+//		
+//		this.clientService.deleteClientById("7");
+//
+//
+//	}
 
 }

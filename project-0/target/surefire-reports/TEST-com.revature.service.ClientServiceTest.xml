@@ -1,85 +1,87 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.revature.service.ClientServiceTest" time="0.652" tests="21" errors="0" skipped="0" failures="0">
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="20" failures="0" name="com.revature.service.ClientServiceTest" time="0.001" errors="0" skipped="0">
   <properties>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib"/>
+    <property name="java.vm.version" value="25.292-b10"/>
     <property name="gopherProxySet" value="false"/>
-    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
-    <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="java.specification.version" value="1.8"/>
-    <property name="sun.cpu.isalist" value=""/>
-    <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0/target/test-classes:/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0/target/classes:/Users/damilare.olaleye/.m2/repository/ch/qos/logback/logback-classic/1.2.6/logback-classic-1.2.6.jar:/Users/damilare.olaleye/.m2/repository/ch/qos/logback/logback-core/1.2.6/logback-core-1.2.6.jar:/Users/damilare.olaleye/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar:/Users/damilare.olaleye/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.13.0/jackson-databind-2.13.0.jar:/Users/damilare.olaleye/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.13.0/jackson-annotations-2.13.0.jar:/Users/damilare.olaleye/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.13.0/jackson-core-2.13.0.jar:/Users/damilare.olaleye/.m2/repository/org/postgresql/postgresql/42.3.1/postgresql-42.3.1.jar:/Users/damilare.olaleye/.m2/repository/org/checkerframework/checker-qual/3.5.0/checker-qual-3.5.0.jar:/Users/damilare.olaleye/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/damilare.olaleye/.m2/repository/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/damilare.olaleye/.m2/repository/org/mockito/mockito-core/4.0.0/mockito-core-4.0.0.jar:/Users/damilare.olaleye/.m2/repository/net/bytebuddy/byte-buddy/1.11.19/byte-buddy-1.11.19.jar:/Users/damilare.olaleye/.m2/repository/net/bytebuddy/byte-buddy-agent/1.11.19/byte-buddy-agent-1.11.19.jar:/Users/damilare.olaleye/.m2/repository/org/objenesis/objenesis/3.2/objenesis-3.2.jar:/Users/damilare.olaleye/.m2/repository/io/javalin/javalin/4.1.1/javalin-4.1.1.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-server/9.4.44.v20210927/jetty-server-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-http/9.4.44.v20210927/jetty-http-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-util/9.4.44.v20210927/jetty-util-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-io/9.4.44.v20210927/jetty-io-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-webapp/9.4.44.v20210927/jetty-webapp-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-xml/9.4.44.v20210927/jetty-xml-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-servlet/9.4.44.v20210927/jetty-servlet-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-security/9.4.44.v20210927/jetty-security-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-util-ajax/9.4.44.v20210927/jetty-util-ajax-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-server/9.4.44.v20210927/websocket-server-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-common/9.4.44.v20210927/websocket-common-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-api/9.4.44.v20210927/websocket-api-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-client/9.4.44.v20210927/websocket-client-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-client/9.4.44.v20210927/jetty-client-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-servlet/9.4.44.v20210927/websocket-servlet-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.5.31/kotlin-stdlib-jdk8-1.5.31.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.5.31/kotlin-stdlib-1.5.31.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.5.31/kotlin-stdlib-common-1.5.31.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.5.31/kotlin-stdlib-jdk7-1.5.31.jar:/Users/damilare.olaleye/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar:/Users/damilare.olaleye/.m2/repository/redis/clients/jedis/2.8.1/jedis-2.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/apache/commons/commons-pool2/2.4.2/commons-pool2-2.4.2.jar:"/>
     <property name="java.vm.vendor" value="AdoptOpenJDK"/>
-    <property name="sun.arch.data.model" value="64"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0"/>
     <property name="java.vendor.url" value="https://adoptopenjdk.net/"/>
-    <property name="user.timezone" value=""/>
-    <property name="java.vm.specification.version" value="1.8"/>
-    <property name="os.name" value="Mac OS X"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib"/>
-    <property name="sun.java.command" value="/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0/target/surefire/surefirebooter643312061998705211.jar /Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0/target/surefire 2021-11-14T17-37-26_969-jvmRun1 surefire9156595671383565003tmp surefire_01413064198417604332tmp"/>
-    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="surefire.test.class.path" value="/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0/target/test-classes:/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0/target/classes:/Users/damilare.olaleye/.m2/repository/ch/qos/logback/logback-classic/1.2.6/logback-classic-1.2.6.jar:/Users/damilare.olaleye/.m2/repository/ch/qos/logback/logback-core/1.2.6/logback-core-1.2.6.jar:/Users/damilare.olaleye/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar:/Users/damilare.olaleye/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.13.0/jackson-databind-2.13.0.jar:/Users/damilare.olaleye/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.13.0/jackson-annotations-2.13.0.jar:/Users/damilare.olaleye/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.13.0/jackson-core-2.13.0.jar:/Users/damilare.olaleye/.m2/repository/org/postgresql/postgresql/42.3.1/postgresql-42.3.1.jar:/Users/damilare.olaleye/.m2/repository/org/checkerframework/checker-qual/3.5.0/checker-qual-3.5.0.jar:/Users/damilare.olaleye/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/damilare.olaleye/.m2/repository/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/damilare.olaleye/.m2/repository/org/mockito/mockito-core/4.0.0/mockito-core-4.0.0.jar:/Users/damilare.olaleye/.m2/repository/net/bytebuddy/byte-buddy/1.11.19/byte-buddy-1.11.19.jar:/Users/damilare.olaleye/.m2/repository/net/bytebuddy/byte-buddy-agent/1.11.19/byte-buddy-agent-1.11.19.jar:/Users/damilare.olaleye/.m2/repository/org/objenesis/objenesis/3.2/objenesis-3.2.jar:/Users/damilare.olaleye/.m2/repository/io/javalin/javalin/4.1.1/javalin-4.1.1.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-server/9.4.44.v20210927/jetty-server-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-http/9.4.44.v20210927/jetty-http-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-util/9.4.44.v20210927/jetty-util-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-io/9.4.44.v20210927/jetty-io-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-webapp/9.4.44.v20210927/jetty-webapp-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-xml/9.4.44.v20210927/jetty-xml-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-servlet/9.4.44.v20210927/jetty-servlet-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-security/9.4.44.v20210927/jetty-security-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-util-ajax/9.4.44.v20210927/jetty-util-ajax-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-server/9.4.44.v20210927/websocket-server-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-common/9.4.44.v20210927/websocket-common-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-api/9.4.44.v20210927/websocket-api-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-client/9.4.44.v20210927/websocket-client-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/jetty-client/9.4.44.v20210927/jetty-client-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/eclipse/jetty/websocket/websocket-servlet/9.4.44.v20210927/websocket-servlet-9.4.44.v20210927.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.5.31/kotlin-stdlib-jdk8-1.5.31.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.5.31/kotlin-stdlib-1.5.31.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.5.31/kotlin-stdlib-common-1.5.31.jar:/Users/damilare.olaleye/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.5.31/kotlin-stdlib-jdk7-1.5.31.jar:/Users/damilare.olaleye/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar:/Users/damilare.olaleye/.m2/repository/redis/clients/jedis/2.8.1/jedis-2.8.1.jar:/Users/damilare.olaleye/.m2/repository/org/apache/commons/commons-pool2/2.4.2/commons-pool2-2.4.2.jar:"/>
-    <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="/Users/damilare.olaleye"/>
-    <property name="user.language" value="en"/>
-    <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.home" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre"/>
-    <property name="basedir" value="/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0"/>
-    <property name="file.separator" value="/"/>
-    <property name="line.separator" value="&#10;"/>
-    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0/target/surefire/surefirebooter643312061998705211.jar"/>
-    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/classes"/>
-    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="java.runtime.version" value="1.8.0_292-b10"/>
-    <property name="user.name" value="damilare.olaleye"/>
-    <property name="path.separator" value=":"/>
-    <property name="os.version" value="10.16"/>
-    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/endorsed"/>
-    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="file.encoding" value="UTF-8"/>
-    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="localRepository" value="/Users/damilare.olaleye/.m2/repository"/>
-    <property name="java.vendor.url.bug" value="https://github.com/AdoptOpenJDK/openjdk-support/issues"/>
-    <property name="java.io.tmpdir" value="/var/folders/kj/n4vrhw0s5p771wv945p8cvcr0000gn/T/"/>
-    <property name="java.version" value="1.8.0_292"/>
-    <property name="user.dir" value="/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0"/>
-    <property name="os.arch" value="x86_64"/>
-    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
     <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/damilare.olaleye/Documents/damilare-olaleye-project-0/project-0"/>
+    <property name="java.runtime.version" value="1.8.0_292-b10"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/kj/n4vrhw0s5p771wv945p8cvcr0000gn/T/"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/opt/homebrew/Cellar/maven/3.8.3/libexec/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/damilare.olaleye/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
-    <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.vendor" value="AdoptOpenJDK"/>
-    <property name="java.vm.version" value="25.292-b10"/>
-    <property name="java.ext.dirs" value="/Users/damilare.olaleye/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
-    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="maven.conf" value="/opt/homebrew/Cellar/maven/3.8.3/libexec/conf"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.16"/>
+    <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.8.3/libexec/lib/jansi-native"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/damilare.olaleye"/>
+    <property name="user.timezone" value="America/Chicago"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="damilare.olaleye"/>
+    <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.8.3/libexec/boot/plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_292"/>
+    <property name="java.ext.dirs" value="/Users/damilare.olaleye/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/classes"/>
+    <property name="java.vendor" value="AdoptOpenJDK"/>
+    <property name="maven.home" value="/opt/homebrew/Cellar/maven/3.8.3/libexec"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="https://github.com/AdoptOpenJDK/openjdk-support/issues"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testDeleteClientByIdPositve" classname="com.revature.service.ClientServiceTest" time="0.028"/>
-  <testcase name="testGetAllClientsSQLExceptionOccursNegative" classname="com.revature.service.ClientServiceTest" time="0.534"/>
-  <testcase name="testGetAddClientPositive" classname="com.revature.service.ClientServiceTest" time="0.016"/>
-  <testcase name="testGetClientIdSpaceIdNegative" classname="com.revature.service.ClientServiceTest" time="0.002"/>
-  <testcase name="testAddClientNegativeInvalidParameterExceptionForId" classname="com.revature.service.ClientServiceTest" time="0.002"/>
-  <testcase name="testGetClientByIdDecimalIdNegative" classname="com.revature.service.ClientServiceTest" time="0.002"/>
-  <testcase name="testGetClientIdInvalidCharactersIdNegative" classname="com.revature.service.ClientServiceTest" time="0"/>
-  <testcase name="testAddClientNegativeInvalidParameterExceptionForPhoneNumber" classname="com.revature.service.ClientServiceTest" time="0"/>
-  <testcase name="testEditIdOfClientInvalidParameterfForInvalidIdCharacter" classname="com.revature.service.ClientServiceTest" time="0.001"/>
-  <testcase name="testAddClientNegativeInvalidParameterExceptionForFirstName" classname="com.revature.service.ClientServiceTest" time="0.001"/>
-  <testcase name="testEditIdOfClientPositive" classname="com.revature.service.ClientServiceTest" time="0.003"/>
-  <testcase name="testAddClientPositive" classname="com.revature.service.ClientServiceTest" time="0.002"/>
-  <testcase name="testEditIdOfClientInvalidParameterfForSpacing" classname="com.revature.service.ClientServiceTest" time="0.001"/>
-  <testcase name="testGetAllClientsPositve" classname="com.revature.service.ClientServiceTest" time="0.002"/>
-  <testcase name="testGetAddClientNegativeDecimal" classname="com.revature.service.ClientServiceTest" time="0.001"/>
-  <testcase name="testEditIdOfClientNotFoundException" classname="com.revature.service.ClientServiceTest" time="0.001"/>
-  <testcase name="testGetClientByIdPositive" classname="com.revature.service.ClientServiceTest" time="0.004"/>
-  <testcase name="testGetClientIdAlphabethIdNegative" classname="com.revature.service.ClientServiceTest" time="0"/>
-  <testcase name="testGetAddClientNegativeFloat" classname="com.revature.service.ClientServiceTest" time="0.001"/>
-  <testcase name="testGetAddClientNegativeAlphabeth" classname="com.revature.service.ClientServiceTest" time="0.001"/>
-  <testcase name="testGetClientbyIdNotFoundNegative" classname="com.revature.service.ClientServiceTest" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAllClientsPositve" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientPositive" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientPositive" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientByIdPositive" time="0.001"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientbyIdNotFoundNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientIdAlphabethIdNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientIdSpaceIdNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientByIdDecimalIdNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientPositive" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientNotFoundException" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientNegativeAlphabeth" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientNegativeFloat" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientNegativeDecimal" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAllClientsSQLExceptionOccursNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientIdInvalidCharactersIdNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientInvalidParameterfForSpacing" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientInvalidParameterfForInvalidIdCharacter" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientNegativeInvalidParameterExceptionForId" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientNegativeInvalidParameterExceptionForFirstName" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientNegativeInvalidParameterExceptionForPhoneNumber" time="0"/>
 </testsuite>

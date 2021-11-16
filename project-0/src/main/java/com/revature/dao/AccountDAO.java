@@ -8,11 +8,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.revature.dto.AddOrUpdateAccountDTO;
 import com.revature.model.Account;
 import com.revature.util.JDBCUtility;
 
 public class AccountDAO {
+	
+	private Logger logger = LoggerFactory.getLogger(ClientDAO.class);
 
 	// CRUD
 	/*
@@ -21,6 +26,8 @@ public class AccountDAO {
 
 	// CREATE ACCOUNT
 	public Account addIntoAccount(int clientId, AddOrUpdateAccountDTO dto) throws SQLException {
+
+		logger.info("addIntoAccount(clientId, dto) invoked");
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "INSERT INTO account (account_status, account_number, account_total_balance, account_type, client_id) VALUES (?,?,?,?,?)";
@@ -52,6 +59,8 @@ public class AccountDAO {
 
 	// READ ACCOUNT
 	public List<Account> getAllAccounts() throws SQLException {
+		
+		logger.info("getAllAccounts() invoked");
 
 		List<Account> listOfAccounts = new ArrayList<>();
 
@@ -82,6 +91,8 @@ public class AccountDAO {
 
 	public List<Account> getAllAccountByClientsId(int client_id, int amountGreaterThan, int amountLessThan)
 			throws SQLException {
+		
+		logger.info("getAllAccountByClientsId(client_id, amountGreaterThan, amountLessThan) invoked");
 
 		List<Account> accounts = new ArrayList<>();
 
@@ -115,6 +126,8 @@ public class AccountDAO {
 
 	public Account getAccountById(int client_id, int account_id) throws SQLException {
 
+		logger.info("getAccountById(client_id, account_id) invoked");
+
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "SELECT * FROM account WHERE account_id = ? AND client_id = ?";
 
@@ -135,7 +148,9 @@ public class AccountDAO {
 	}
 
 	// UPDATE ACCOUNT
-	public Account updateAccount(int clientId, int accountId, AddOrUpdateAccountDTO account) throws SQLException {
+	public Account updateAccount(int clientId, int accountId, AddOrUpdateAccountDTO dto) throws SQLException {
+
+		logger.info("updateAccount(clientId, accountId, account) invoked");
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "UPDATE account SET account_status = ?, account_number = ?,"
@@ -143,10 +158,10 @@ public class AccountDAO {
 
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
-			pstmt.setString(1, account.getAccountStatus());
-			pstmt.setDouble(2, account.getAccountNumber());
-			pstmt.setDouble(3, account.getAccountTotalBalance());
-			pstmt.setString(4, account.getAccountType());
+			pstmt.setString(1, dto.getAccountStatus());
+			pstmt.setDouble(2, dto.getAccountNumber());
+			pstmt.setDouble(3, dto.getAccountTotalBalance());
+			pstmt.setString(4, dto.getAccountType());
 			pstmt.setInt(5, clientId);
 			pstmt.setInt(6, accountId);
 
@@ -157,13 +172,15 @@ public class AccountDAO {
 						"Unable to update account record with id of " + accountId + ", no refrences to " + clientId);
 			}
 
-			return new Account(accountId, account.getAccountStatus(), account.getAccountNumber(),
-					account.getAccountTotalBalance(), account.getAccountType(), clientId);
+			return new Account(accountId, dto.getAccountStatus(), dto.getAccountNumber(),
+					dto.getAccountTotalBalance(), dto.getAccountType(), clientId);
 		}
 
 	}
 
 	public void editAccountId(int clientId, int accountId) throws SQLException {
+
+		logger.info("editAccountId(clientId, accountId) invoked");
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "INSERT INTO account (client_id, account_status, account_number, account_total_balance, account_type) "
@@ -189,6 +206,8 @@ public class AccountDAO {
 
 	public void deleteClientAndAccountId(int clientId, int accountId) throws SQLException {
 
+		logger.info("deleteClientAndAccountId(clientId, accountId) invoked");
+
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "DELETE FROM account WHERE account_id = ? AND client_id = ?;";
 
@@ -204,6 +223,8 @@ public class AccountDAO {
 	}
 
 	public void deleteAccountByClientId(int clientId, int accountId) throws SQLException {
+
+		logger.info("deleteAccountByClientId(clientId, accountId) invoked");
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "DELETE FROM account WHERE client_id = ? AND account_id = ?";
@@ -223,6 +244,8 @@ public class AccountDAO {
 
 	public void deleteAccount(int client_id, int account_id) throws SQLException {
 		try (Connection con = JDBCUtility.getConnection()) {
+			
+			logger.info("deleteAccount(clientId, accountId) invoked");
 
 			String sql = "DELETE FROM account WHERE client_id = ? AND account_id = ?";
 

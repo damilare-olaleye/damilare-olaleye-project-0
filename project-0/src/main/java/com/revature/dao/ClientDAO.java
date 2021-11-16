@@ -8,11 +8,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.revature.dto.AddOrUpdateClientDTO;
 import com.revature.model.Client;
 import com.revature.util.JDBCUtility;
 
 public class ClientDAO {
+	
+	private Logger logger = LoggerFactory.getLogger(ClientDAO.class);
 
 	// CRUD
 	/*
@@ -21,6 +26,8 @@ public class ClientDAO {
 
 	// CREATE CLIENT
 	public Client addClient(AddOrUpdateClientDTO client) throws SQLException {
+		
+		logger.info("addClient(client) invoked");
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "INSERT INTO client (client_first_name, client_last_name, client_street, client_pin_code, client_phone_number) VALUES (?,?,?,?,?)";
@@ -52,6 +59,8 @@ public class ClientDAO {
 	// READ CLIENT
 	public List<Client> getAllClients() throws SQLException {
 
+		logger.info("getAllClients() invoked");
+		
 		List<Client> listOfClients = new ArrayList<>();
 
 		try (Connection con = JDBCUtility.getConnection()) {
@@ -78,6 +87,9 @@ public class ClientDAO {
 	}
 
 	public Client getClientById(int id) throws SQLException {
+		
+		logger.info("getAllClients(id) invoked");
+
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "SELECT * FROM client WHERE client_id = ?";
@@ -101,6 +113,8 @@ public class ClientDAO {
 
 	// UPDATE CLIENT
 	public Client updateClient(int clientId, AddOrUpdateClientDTO client) throws SQLException {
+
+		logger.info("updateClient(clientId, client) invoked");
 
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "UPDATE client "
@@ -131,6 +145,8 @@ public class ClientDAO {
 	// DELETE CLIENT
 	public void deleteClientId(int id) throws SQLException {
 
+		logger.info("updateClient(id) invoked");
+
 		try (Connection con = JDBCUtility.getConnection()) {
 			String sql = "DELETE FROM client WHERE client_id = ?";
 
@@ -147,6 +163,8 @@ public class ClientDAO {
 
 	public void deleteAllClients() throws SQLException {
 		try (Connection con = JDBCUtility.getConnection()) {
+
+			logger.info("deleteAllClients() invoked");
 
 			String sql = "DELETE FROM client";
 			PreparedStatement pstmt = con.prepareStatement(sql);

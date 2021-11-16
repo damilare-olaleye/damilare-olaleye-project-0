@@ -31,7 +31,7 @@ public class AccountService {
 	}
 
 	// Mockito Mock Test
-	private AccountService(AccountDAO accountDao, ClientDAO clientDao) {
+	public AccountService(AccountDAO accountDao, ClientDAO clientDao) {
 		this.accountDao = accountDao;
 		this.clientDao = clientDao;
 
@@ -46,7 +46,7 @@ public class AccountService {
 		Set<String> validStatus = new HashSet<>();
 		validStatus.add("active");
 		validStatus.add("inactive");
-		validStatus.add("invalid");
+		validStatus.add("suspended");
 
 		// validate account status
 		if (!validStatus.contains(dto.getAccountStatus())) {
@@ -101,6 +101,7 @@ public class AccountService {
 			
 			int client_id = Integer.parseInt(clientId);
 
+
 			if (ctx.queryParam("amountGreaterThan") != null && ctx.queryParam("amountLessThan") != null) {
 				int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
 				int lessThan = Integer.parseInt(ctx.queryParam("amountLessThan"));
@@ -117,10 +118,10 @@ public class AccountService {
 
 				int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
 
-				accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, 2000);
+				accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, 4000);
 
 			} else {
-				accounts = this.accountDao.getAllAccountByClientsId(client_id, 200, 2000);
+				accounts = this.accountDao.getAllAccountByClientsId(client_id, 200, 4000);
 
 			}
 
