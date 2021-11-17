@@ -3092,3 +3092,9 @@
 				com.revature.service.ClientService - addClient(dto) invoked
 17 Nov 2021 - 13:18:37.526 [qtp188576144-27] INFO 
 				com.revature.dao.ClientDAO - addClient(client) invoked
+17 Nov 2021 - 13:21:41.545 [qtp188576144-32] INFO 
+				com.revature.main.Application - POST request received to the /clients endpoint
+17 Nov 2021 - 13:21:41.556 [qtp188576144-32] INFO 
+				com.revature.service.ClientService - addClient(dto) invoked
+17 Nov 2021 - 13:21:41.556 [qtp188576144-32] INFO 
+				com.revature.dao.ClientDAO - addClient(client) invoked
