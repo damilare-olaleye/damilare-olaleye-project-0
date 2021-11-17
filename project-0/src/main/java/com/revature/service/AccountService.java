@@ -123,10 +123,10 @@ public class AccountService {
 
 			int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
 
-			accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, 100);
+			accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, 1000000000);
 
 		} else {
-			accounts = this.accountDao.getAllAccountByClientsId(client_id, 0, 100);
+			accounts = this.accountDao.getAllAccountByClientsId(client_id, 0, 1000000000);
 
 		}
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="20" failures="0" name="com.revature.service.ClientServiceTest" time="0.001" errors="0" skipped="0">
+<testsuite tests="23" failures="0" name="com.revature.service.ClientServiceTest" time="0.014" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib"/>
@@ -64,24 +64,27 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAllClientsPositve" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientPositive" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientPositive" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientByIdPositive" time="0.001"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientbyIdNotFoundNegative" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientIdAlphabethIdNegative" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientIdSpaceIdNegative" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientByIdDecimalIdNegative" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientPositive" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientNotFoundException" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientNegativeAlphabeth" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientNegativeFloat" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientNegativeDecimal" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAllClientsSQLExceptionOccursNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientNegativeInvalidParameterExceptionForFirstName" time="0.001"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientNegativeInvalidParameterExceptionForPhoneNumber" time="0"/>
   <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientIdInvalidCharactersIdNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientNotFoundExceptionIDNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAllClientsSQLExceptionOccursNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientNotFoundExceptionIDAlphabeth" time="0"/>
   <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientInvalidParameterfForSpacing" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientInvalidParameterfForSpacingAllClients" time="0"/>
   <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientInvalidParameterfForInvalidIdCharacter" time="0"/>
   <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientNegativeInvalidParameterExceptionForId" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientNegativeInvalidParameterExceptionForFirstName" time="0"/>
-  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientNegativeInvalidParameterExceptionForPhoneNumber" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAllClientsPositve" time="0.001"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientPositive" time="0.004"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testAddClientPositive" time="0.002"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientByIdPositive" time="0.001"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientbyIdNotFoundNegative" time="0.001"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientIdAlphabethIdNegative" time="0.001"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientIdSpaceIdNegative" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetClientByIdDecimalIdNegative" time="0.001"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientPositive" time="0.001"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testEditIdOfClientNotFoundException" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientNegativeAlphabeth" time="0.001"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientNegativeFloat" time="0"/>
+  <testcase classname="com.revature.service.ClientServiceTest" name="com.revature.service.ClientServiceTest.testGetAddClientNegativeDecimal" time="0"/>
 </testsuite>

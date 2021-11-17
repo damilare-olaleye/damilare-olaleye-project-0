@@ -43,23 +43,16 @@ public class AccountController {
 	 * GET /clients/{client_id}/accounts: Get all accounts for client with id of X
 	 * GET /clients/{client_id}/accounts?amountLessThan=2000&amountGreaterThan=400
 	 */
-	
+
 	private Handler getAllAccountsByClientId = (ctx) -> {
 
 		String clientId = ctx.pathParam("client_id");
 
-		if (this.clientService.getClientById(clientId) != null) {
+		List<Account> accounts = this.accountService.getAllAccountsByClientId(clientId, ctx);
 
-			List<Account> accounts = this.accountService.getAllAccountsByClientId(clientId, ctx);
+		ctx.json(accounts);
+		ctx.status(201);
 
-			ctx.json(accounts);
-			ctx.status(201);
-			
-		} else {
-			ctx.json("Cannot get account by client id");
-			ctx.status(400);
-		}
-		
 	};
 
 	// Get account with id of Y belonging to client with id of X

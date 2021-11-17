@@ -195,7 +195,5 @@ public class AccountServiceTest {
 			accountService.addAccount("2", dto);
 		});
 	}
-	
-	
-	
+
 }
