@@ -74,6 +74,8 @@ public class AccountService {
 		try {
 			int clientId = Integer.parseInt(client_id);
 
+			// validate client id
+
 			if (clientId == -1) {
 				throw new InvalidParameterException("ClientId cannot be negative 1. Please enter the right client ID");
 			}
@@ -95,41 +97,40 @@ public class AccountService {
 	public List<Account> getAllAccountsByClientId(String clientId, Context ctx)
 			throws SQLException, InvalidParameterException, NotFoundException {
 
-		try {
+		List<Account> accounts;
 
-			List<Account> accounts;
-			
-			int client_id = Integer.parseInt(clientId);
+		int client_id = Integer.parseInt(clientId);
 
+		Client client = this.clientDao.getClientById(client_id);
 
-			if (ctx.queryParam("amountGreaterThan") != null && ctx.queryParam("amountLessThan") != null) {
-				int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
-				int lessThan = Integer.parseInt(ctx.queryParam("amountLessThan"));
-
-				accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, lessThan);
-
-			} else if (ctx.queryParam("amountLessThan") != null) {
-
-				int lessThan = Integer.parseInt(ctx.queryParam("amountLessThan"));
-
-				accounts = this.accountDao.getAllAccountByClientsId(client_id, 200, lessThan);
-
-			} else if (ctx.queryParam("amountGreaterThan") != null) {
-
-				int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
-
-				accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, 4000);
-
-			} else {
-				accounts = this.accountDao.getAllAccountByClientsId(client_id, 200, 4000);
-
-			}
-
-			return accounts;
-
-		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Client not found");
+		if (client == null) {
+			throw new NotFoundException("Cannot find client with client id of ");
 		}
+
+		if (ctx.queryParam("amountGreaterThan") != null && ctx.queryParam("amountLessThan") != null) {
+			int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
+			int lessThan = Integer.parseInt(ctx.queryParam("amountLessThan"));
+
+			accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, lessThan);
+
+		} else if (ctx.queryParam("amountLessThan") != null) {
+
+			int lessThan = Integer.parseInt(ctx.queryParam("amountLessThan"));
+
+			accounts = this.accountDao.getAllAccountByClientsId(client_id, 0, lessThan);
+
+		} else if (ctx.queryParam("amountGreaterThan") != null) {
+
+			int greaterThan = Integer.parseInt(ctx.queryParam("amountGreaterThan"));
+
+			accounts = this.accountDao.getAllAccountByClientsId(client_id, greaterThan, 100);
+
+		} else {
+			accounts = this.accountDao.getAllAccountByClientsId(client_id, 0, 100);
+
+		}
+
+		return accounts;
 
 	}
 

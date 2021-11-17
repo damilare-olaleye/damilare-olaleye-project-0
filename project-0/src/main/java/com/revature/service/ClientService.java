@@ -29,7 +29,7 @@ public class ClientService {
 	public Client editClientById(String clientId, String editFirstName, String editLastName, String editPhoneNumber,
 			String editPinCode, String editStreet) throws NotFoundException, SQLException, InvalidParameterException {
 
-		logger.info("editClientById(clientId) invoked");
+		logger.info("editClientById(clientId...) invoked");
 
 		try {
 
@@ -46,10 +46,14 @@ public class ClientService {
 
 			Client updatedClient = this.clientDao.updateClient(client_id, dto);
 
+			if (updatedClient == null) {
+				throw new NotFoundException("Cannot update client, sorry");
+			}
+
 			return updatedClient;
 
 		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Id provided is not an int convertable value");
+			throw new NotFoundException("Id provided is not an int convertable value, please enter the correct id");
 		}
 	}
 
@@ -77,34 +81,44 @@ public class ClientService {
 			return c;
 
 		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Id provided is not an int convertable value");
+			throw new NotFoundException("Id provided is not an int convertable value");
 		}
 	}
 
-	public Client addClient(AddOrUpdateClientDTO dto) throws InvalidParameterException, SQLException {
+	public Client addClient(AddOrUpdateClientDTO dto)
+			throws InvalidParameterException, SQLException, NotFoundException {
 
 		logger.info("addClient(dto) invoked");
 
 		try {
 
 			if (dto.getFirstName().trim().equals("")) {
-				throw new InvalidParameterException("First name cannot be blank");
+				throw new NotFoundException("first name cannot be blank");
 			}
 
 			if (dto.getLastName().trim().equals("")) {
-				throw new InvalidParameterException("Last name cannot be blank");
-
+				throw new NotFoundException("last name cannot be blank");
 			}
+		
+
 			if (dto.getPinCode().trim().equals("")) {
-				throw new InvalidParameterException("PinCode cannot be blank");
+				throw new NotFoundException("pin code cannot be blank");
 			}
 
 			if (dto.getStreet().trim().equals("")) {
-				throw new InvalidParameterException("PinCode cannot be blank");
+				throw new NotFoundException("street name cannot be blank");
 			}
 
 			if (dto.getPhoneNumber().trim().equals("")) {
-				throw new InvalidParameterException("Phone Number cannot be blank");
+				throw new NotFoundException("phone number cannot be blank");
+			}
+			
+			if ((dto.getLastName().trim().equals("")) && (dto.getFirstName().trim().equals("")) 
+					&& (dto.getPinCode().trim().equals("")) && (dto.getPinCode().trim().equals("")) 
+					&& (dto.getStreet().trim().equals("")) && (dto.getPhoneNumber().trim().equals(""))) {
+				
+				throw new NotFoundException("Please fill in the blanks, namaste (thank you)!");
+				
 			}
 
 			dto.setFirstName(dto.getFirstName().trim());
@@ -118,7 +132,7 @@ public class ClientService {
 			return insertedClient;
 
 		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Invalid parameter was thrown");
+			throw new NotFoundException("Invalid parameter was thrown");
 		}
 
 	}
@@ -140,11 +154,11 @@ public class ClientService {
 			this.clientDao.deleteClientId(id);
 
 		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Id supplied is not an int");
+			throw new NotFoundException("Id supplied is not an int");
 		}
 	}
 
-	public void deleteAllClient() throws SQLException, InvalidParameterException {
+	public void deleteAllClient() throws SQLException, InvalidParameterException, NotFoundException {
 
 		logger.info("deleteAllClients() invoked");
 
@@ -159,7 +173,7 @@ public class ClientService {
 			this.clientDao.deleteAllClients();
 
 		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("Invalid parameter suppplied");
+			throw new NotFoundException("Invalid parameter suppplied");
 		}
 	}
 

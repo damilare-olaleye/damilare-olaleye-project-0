@@ -130,7 +130,7 @@ public class ClientServiceTest {
 
 		ClientService clientService = new ClientService(mockClientDao);
 
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.getClientById("abdcfj");
 		});
@@ -149,7 +149,7 @@ public class ClientServiceTest {
 
 		ClientService clientService = new ClientService(mockClientDao);
 
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.getClientById(" ");
 		});
@@ -168,7 +168,7 @@ public class ClientServiceTest {
 
 		ClientService clientService = new ClientService(mockClientDao);
 
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.getClientById("./-`x");
 		});
@@ -187,7 +187,7 @@ public class ClientServiceTest {
 
 		ClientService clientService = new ClientService(mockClientDao);
 
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.getClientById("1.0");
 		});
@@ -247,6 +247,43 @@ public class ClientServiceTest {
 	}
 
 	// Negative Test
+	@Test
+	public void testEditIdOfClientNotFoundExceptionIDNegative() {
+
+		// ARRANGE
+
+		ClientDAO mockClientDao = mock(ClientDAO.class);
+
+		ClientService clientService = new ClientService(mockClientDao);
+
+		// ACT AND ASSERT
+		Assertions.assertThrows(NotFoundException.class, () -> {
+
+			clientService.editClientById("-1", "Babarra", "Cocorran", "7778903746", "2324", "8327 W south Bend");
+		});
+
+	}
+
+	// Negative Test
+
+	@Test
+	public void testEditIdOfClientNotFoundExceptionIDAlphabeth() {
+
+		// ARRANGE
+
+		ClientDAO mockClientDao = mock(ClientDAO.class);
+
+		ClientService clientService = new ClientService(mockClientDao);
+
+		// ACT AND ASSERT
+		Assertions.assertThrows(NotFoundException.class, () -> {
+
+			clientService.editClientById("avcb", "Babarra", "Cocorran", "7778903746", "2324", "8327 W south Bend");
+		});
+
+	}
+
+	// Negative Test
 
 	@Test
 	public void testEditIdOfClientInvalidParameterfForSpacing() {
@@ -258,9 +295,28 @@ public class ClientServiceTest {
 		ClientService clientService = new ClientService(mockClientDao);
 
 		// ACT AND ASSERT
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.editClientById(" ", "Babarra", "Cocorran", "7778903746", "2324", "8327 W south Bend");
+		});
+
+	}
+
+	// Negative Test
+
+	@Test
+	public void testEditIdOfClientInvalidParameterfForSpacingAllClients() {
+
+		// ARRANGE
+
+		ClientDAO mockClientDao = mock(ClientDAO.class);
+
+		ClientService clientService = new ClientService(mockClientDao);
+
+		// ACT AND ASSERT
+		Assertions.assertThrows(NotFoundException.class, () -> {
+
+			clientService.editClientById(" ", " ", " ", " ", " ", " ");
 		});
 
 	}
@@ -277,7 +333,7 @@ public class ClientServiceTest {
 		ClientService clientService = new ClientService(mockClientDao);
 
 		// ACT AND ASSERT
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.editClientById("- _ -", "Babarra", "Cocorran", "7778903746", "2324", "8327 W south Bend");
 		});
@@ -319,7 +375,7 @@ public class ClientServiceTest {
 		ClientService clientService = new ClientService(mockClientDao);
 
 		// ACT AND ASSERT
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.getClientById("xyz");
 		});
@@ -336,7 +392,7 @@ public class ClientServiceTest {
 		ClientService clientService = new ClientService(mockClientDao);
 
 		// ACT AND ASSERT
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.getClientById("4789f");
 		});
@@ -351,7 +407,7 @@ public class ClientServiceTest {
 		ClientService clientService = new ClientService(mockClientDao);
 
 		// ACT AND ASSERT
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.getClientById("3.14");
 		});
@@ -397,7 +453,7 @@ public class ClientServiceTest {
 		AddOrUpdateClientDTO dto = new AddOrUpdateClientDTO(" ", "O'leary", "3736 W Cubec Rd", "3726", "9002839857");
 
 		// ACT AND ASSERT
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.addClient(dto);
 		});
@@ -415,7 +471,7 @@ public class ClientServiceTest {
 		AddOrUpdateClientDTO dto = new AddOrUpdateClientDTO("4", " ", "3736 W Cubec Rd", "3726", "9002839857");
 
 		// ACT AND ASSERT
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.addClient(dto);
 		});
@@ -433,7 +489,7 @@ public class ClientServiceTest {
 		AddOrUpdateClientDTO dto = new AddOrUpdateClientDTO("10", "O'leary", "3736 W Cubec Rd", "3726", " ");
 
 		// ACT AND ASSERT
-		Assertions.assertThrows(InvalidParameterException.class, () -> {
+		Assertions.assertThrows(NotFoundException.class, () -> {
 
 			clientService.addClient(dto);
 		});
@@ -448,13 +504,13 @@ public class ClientServiceTest {
 //		
 //		ClientDAO mockClientDao = mock(ClientDAO.class);
 //		
-//		when(mockClientDao.deleteClientId(eq(7))).thenReturn(new Client(7, "Lori", "Grenier", "3036 W Cubec Rd", "3726", "9002839857"));
+//		when(mockClientDao.getClientById(eq(7))).thenReturn(new Client(7, "Lori", "Grenier", "3036 W Cubec Rd", "3726", "9002839857"));
 //		
 //		ClientService clientService = new ClientService(mockClientDao);
 //		
 //		// ACT
 //		
-//		this.clientService.deleteClientById("7");
+//		Client actual = clientService.getClientById(null)
 //
 //
 //	}

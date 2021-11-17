@@ -30,7 +30,7 @@ public class AccountController {
 			AddOrUpdateAccountDTO dto = ctx.bodyAsClass(AddOrUpdateAccountDTO.class);
 			Account accounts = this.accountService.addAccount(clientId, dto);
 
-			ctx.json(accounts);
+			ctx.json("Account succesfully added " + accounts);
 			ctx.status(201);
 
 		} else {
@@ -43,18 +43,23 @@ public class AccountController {
 	 * GET /clients/{client_id}/accounts: Get all accounts for client with id of X
 	 * GET /clients/{client_id}/accounts?amountLessThan=2000&amountGreaterThan=400
 	 */
+	
 	private Handler getAllAccountsByClientId = (ctx) -> {
 
 		String clientId = ctx.pathParam("client_id");
 
-		if (clientId == null) {
+		if (this.clientService.getClientById(clientId) != null) {
+
+			List<Account> accounts = this.accountService.getAllAccountsByClientId(clientId, ctx);
+
+			ctx.json(accounts);
+			ctx.status(201);
+			
+		} else {
+			ctx.json("Cannot get account by client id");
 			ctx.status(400);
 		}
-
-		List<Account> accounts = this.accountService.getAllAccountsByClientId(clientId, ctx);
-
-		ctx.json(accounts);
-
+		
 	};
 
 	// Get account with id of Y belonging to client with id of X
@@ -63,6 +68,7 @@ public class AccountController {
 		List<Account> accounts = this.accountService.getAllAccounts();
 
 		ctx.json(accounts);
+		ctx.status(201);
 	};
 
 	// Update account with id of Y belonging to client with id of X
@@ -73,7 +79,7 @@ public class AccountController {
 
 		Account accounts = this.accountService.editAccountClientId(clientId, accountId);
 
-		ctx.json(accounts);
+		ctx.json("Account by Client id " + "have been succesfully edited " + accounts);
 		ctx.status(201);
 	};
 
@@ -86,7 +92,7 @@ public class AccountController {
 
 		this.accountService.deleteAccountByClientId(clientId, accountId);
 
-		ctx.json("Client with id of " + clientId + "with account id " + "of " + accountId
+		ctx.json("Client with id of " + clientId + " with account id " + "of " + accountId
 				+ "has been successfully deleted!");
 		ctx.status(201);
 	};

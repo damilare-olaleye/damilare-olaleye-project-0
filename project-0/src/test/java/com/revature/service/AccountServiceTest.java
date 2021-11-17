@@ -133,6 +133,8 @@ public class AccountServiceTest {
 		});
 	}
 	
+	//NEGATIVE Test
+	
 	@Test
 	public void testAddAccountNegativeForInvalidInputForAccountType() {
 		
@@ -152,6 +154,48 @@ public class AccountServiceTest {
 		});
 	}
 	
-
+	// NEGATIVE Test
+	
+	@Test
+	public void testAddAccountNegativeForInvalidInputForAccountStatus() {
+		
+		// ARRANGE 
+		
+		AccountDAO mockAccountDao = mock(AccountDAO.class);
+		ClientDAO mockClientDao = mock(ClientDAO.class);
+		
+		AccountService accountService = new AccountService(mockAccountDao, mockClientDao);
+		
+		// ACT AND ASSERT
+		
+		AddOrUpdateAccountDTO dto = new AddOrUpdateAccountDTO(2, "statuss", 1232, 2323, "checkings", 5);
+		Assertions.assertThrows(InvalidParameterException.class, () -> {
+			
+			accountService.addAccount("2", dto);
+		});
+	}
+	
+	// NEGATIVE Test
+	
+	@Test
+	public void testAddAccountNegativeForInvalidInputForAccountStatusAndAccountType() {
+		
+		// ARRANGE 
+		
+		AccountDAO mockAccountDao = mock(AccountDAO.class);
+		ClientDAO mockClientDao = mock(ClientDAO.class);
+		
+		AccountService accountService = new AccountService(mockAccountDao, mockClientDao);
+		
+		// ACT AND ASSERT
+		
+		AddOrUpdateAccountDTO dto = new AddOrUpdateAccountDTO(2, "statuss", 1232, 2323, "notcheckings", 5);
+		Assertions.assertThrows(InvalidParameterException.class, () -> {
+			
+			accountService.addAccount("2", dto);
+		});
+	}
+	
+	
 	
 }
