@@ -1,5 +1,4 @@
-# damilare-olaleye-project-0
-# Project 0: RESTful API
+# Damilare Olaleye ***Project 0: RESTful API ***
 
 Due Date: November 17th
 
